@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       41ecc113-232e-4f71-bf2e-1c203a8a4ac8
+:END:
+#+title: IO管理基础
+
+
+[[id:fbf8fd4a-a9c4-4374-8879-63ef3a5b7802][IO设备分类]]
+
+[[id:539f8348-d067-4131-b82f-83b875f4e8b6][IO接口功能]]

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       50926bba-9ffe-4c28-81c3-b74ed9b274f7
+:END:
+#+title: 基础内存管理
+
+[[id:47c17dfc-0a33-4633-adaf-e58c03a262af][程序的装入与链接]]
+
+[[id:d30a51cc-9544-4fd4-a607-12a94ab88974][内存保护与共享]]
+
+[[id:1d3e4e5a+1ab9+4bb5+9cac+e26573b171f2][内存管理方式]]

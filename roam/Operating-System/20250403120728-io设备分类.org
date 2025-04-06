@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       fbf8fd4a-a9c4-4374-8879-63ef3a5b7802
+:END:
+#+title: IO设备分类
+#+STARTUP: overview
+
+#+begin_src mermaid :file ./pic/IO_DEVICE_SORT.png
+mindmap
+  root((IO设备分类))
+    按使用特性
+        存储设备
+        输入输出型设备
+    按传输速率
+        低速设备
+        中速设备
+        高速设备
+    按信息交换单位
+        字符设备
+        块设备
+    按设备共享属性
+        独占设备
+        共享设备
+        虚拟设备
+
+
+#+end_src
+
+#+RESULTS:
+[[file:./pic/IO_DEVICE_SORT.png]]

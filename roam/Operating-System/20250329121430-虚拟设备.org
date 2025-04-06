@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       a8d6d2dd-183c-4179-a4c9-59bd76b6b6bf
+:END:
+#+title: 虚拟设备

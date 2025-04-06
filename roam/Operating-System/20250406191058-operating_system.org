@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       f5c7c1bd-4881-4053-8398-30a57044a7dd
+:END:
+#+title: operating system
+#+filetags: :OS:
+
+[[id:9053e8f6-74fa-49cc-9c71-2cdbe70b193b][operating system memory manage]]
+
+[[id:a1286a89-8a08-4844-b263-b366d2b15eb9][operating system IO manage]]

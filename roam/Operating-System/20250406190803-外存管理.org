@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       e7ac1136-573d-447d-9714-551baddd0426
+:END:
+#+title: 外存管理
+
+
+[[id:14d15f32-b864-4fdb-aaf0-efb294500f59][固态硬盘SSD]]

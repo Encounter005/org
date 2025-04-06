@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9053e8f6-74fa-49cc-9c71-2cdbe70b193b
+:ROAM_ALIASES: OS_MEMORY
+:END:
+#+title: operating system memory manage
+#+filetags: :OS: :MEMORY:
+
+[[id:50926bba-9ffe-4c28-81c3-b74ed9b274f7][基础内存管理]]
+
+[[id:a8d6d2dd-183c-4179-a4c9-59bd76b6b6bf][虚拟设备]]

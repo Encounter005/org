@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       a1286a89-8a08-4844-b263-b366d2b15eb9
+:END:
+#+title: operating system IO manage
+#+filetags: :OS: :IO:
+
+[[id:41ecc113-232e-4f71-bf2e-1c203a8a4ac8][IO管理基础]]
+
+[[id:e7ac1136-573d-447d-9714-551baddd0426][外存管理]]
