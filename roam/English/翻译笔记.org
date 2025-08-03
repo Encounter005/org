@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       ea8b6c58-c263-4814-8c80-9f2f0cf543c6
+:END:
+#+title: 翻译笔记
+#+filetags: :Translation:
+
+* 研途英语暑期翻译课程笔记
+** 方法论
+*** 词汇
+1. 增加词汇
+   + I loved you. 我曾经爱过你
+2. 删减词汇
+3. 词性转换
+4. 语义转换
+5. 词义选择
+   1. 固定搭配
+      + 可猜：filter out = find out 弄明白/ be designed to 旨在/be superior to 超过
+      + 不可猜： rather than 而不是 / not ... any more 不.... 也不
+   2. 一词多义
+      1. 形式 schooling 学校教育/ reasoning 推理/ wronged 被冤枉 / shaped 塑造 / a people = some peoples 民族
+
+*** 句子
+1. 拆分：【拆除修饰】
+   + 标点符号：自动拆分
+   + 并列连词：结构对称：and / or / but / yet / while / whereas / _ and _
+   + 【从句引导词….句子结束】--- that / wh- / how / because / if / while / as
+   + 【短语形式的修饰】---【介词短语、非谓语动词短语v+ing / v+ed / to+v→前面没有系动词】----[←从句--]------[←介词--]----[←非谓语动词---]------
+2. 组合： 进行排序
+   【合句/分句】+【前置/后置】
+**** 短语
+1. 同位语
+   My friend Tom often help others.
+2. 定语
+   名词A +【B←介词短语、现在分词、过去分词、不定式】
+   后置定语的翻译方法：修饰名词，就放在名词之前，合成一个句子进行翻译
+
+3. 状语
+   He runs in the park.
+   To keep fit, he runs
+   短语作状语的翻译方法：修饰动作，一般就放在动作之前进行翻译即可。必要时，可添加适当的逻辑关系词
+4. 补充
+   主语+谓语+宾语
+   主语+系动词+表语
+   To see is to believe
+   Seeing is believing

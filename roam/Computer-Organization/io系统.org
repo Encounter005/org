@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       58b0d70b-b33e-4467-8dcd-2465953f7f08
+:END:
+#+title: IO系统
+#+filetags: :IO-SYSTEM:
+#+STARTUP: overview
+
+[[id:3a13647f-084b-4906-b5b9-4edfef852504][IO方式]]
+
+[[id:22a05b1a-cae6-4b1d-90bf-e7d62393368d][IO接口]]

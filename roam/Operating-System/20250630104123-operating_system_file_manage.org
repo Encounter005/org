@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       634549dd-1ab2-459e-b506-bb465a0a80c1
+:END:
+#+title: operating system file manage
+#+filetags: :OS FILE DIRECTORY FILE-SYSTEM:
+
+[[id:08f81796-3bc5-498f-8809-83bf4e3e539c][文件]]
+
+[[id:a237f6ac-2050-4f17-960e-88add848684e][目录]]
+
+[[id:4b39d996-7899-48e6-9faa-17e8e1294029][文件系统]]

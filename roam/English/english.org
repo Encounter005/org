@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       ffc8d768-8520-4b0e-bf26-6eee2852dfc2
+:END:
+#+title: English
+#+filetags: :English:
+
+
+- [[id:6487390b-63bc-4eac-a604-6269ad209f3b][小作文笔记]]
+- [[id:3915bb52-e01d-44f0-9891-9217ea38b1ee][图表作文笔记]]
+- [[id:4f03d814-1bd0-44e4-9d01-d8adc47c2f8a][图画作文]]
+- [[id:ea8b6c58-c263-4814-8c80-9f2f0cf543c6][翻译笔记]]
+- [[id:0e17d4fe-f2b7-4ee8-8f0b-c1b6e3e02ac5][阅读笔记]]
+- [[id:5abd847d-4fa1-49df-b813-aa04f343186f][完形填空]]

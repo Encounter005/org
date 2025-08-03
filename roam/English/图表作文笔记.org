@@ -1,0 +1,98 @@
+:PROPERTIES:
+:ID:       3915bb52-e01d-44f0-9891-9217ea38b1ee
+:END:
+#+title: 图表作文笔记
+#+filetags: :Chart Writing:
+
+字数：150-170 words
+选词：名词化->三明治化（adj. + n. + 介词/不定式/分词短语）
+
+* 图类型
+- bar chart（柱状图）
+- pie chart（饼图）
+- line graph（折线图）
+- table（数据表格）
+
+* 动图（changes）
+有时间变量
+
+* 静图（difference）
+无时间变量
+
+* 三段式
+** 第一段描图
+***   总体描述句（difference/changes）
+- The table / chart / graph / above indicates (shown / demonstrated) that dramatic / remarkable / conspicuous changes / differences have taken place in ... from ... to ... (年份)
+
+图表题目翻译方法
+1. 先删除（图、占比、调查、统计、情况）
+2. 找时间放在最后
+3. 找地点放在时间前（应当尽当）
+4. 翻译名词（从后向前）介词用of、in等
+
+*** 细节描述句（分对象，逐个描述）
+- 动态图至少两个
+- 静态图一句话
+****   动态图
+The number / figure/ percentage of grew / rose / dropped / fall / shrank (slightly / slowly / markedly / dramatically / sharply / suddenly ) from to  (注意使用过去式)
+
+There was a (minimal / slight / slow / steady / marked / dramatic / sharp / sudden) (increase / rise / decline / reduction / fall/ drop) in ... from ... to ..., during the same time / period.
+
+In the meanwhile, the (five) years also witnessed a (slight increase) in ... from ... to ... / at ...
+
+****   静态图
+Among these data, the most striking one is OBJ1, which takes up ... . What's more, OBJ2 accounts for a vast part, taking up ... while OBJ3 and OBJ4 amount to ... and ... respectively.(分别地)
+
+*** 主题句 P31
+After considering the information in the graph / table / chart, we might conclude that ...
++ 改进提高
+  - improve
+    have been improved largely
+  - improvement
+    have a great improvement.
++ 受欢迎
+  have been gaining great popularity from / among
+
+*** [#C] 细描句之间逻辑关系词
+while / by comparison 表示对比（趋势一上一下）
+on the contrary / unfortunately 表示转折（趋势同方向，增长速度不一样）
+in addition / moreover / meanwhile 表示并列递进
+
+** 解图（解释原因）P35
+***   第一句
+Some driving factors that contribute to the above mentioned changed may be summarized as follows.
+
+***   第二句
+On the one hand, + 原因分析句
+
+***   第三句
+On the other hand + 原因分析句
+
+***   结构化
+1. Previously
+2. Moreover
+3. Lastly
+
+***   原因分析句
+****   科技原因
+- Advancements in science and technology have offered a technical foundation for the rapid development of ...
+- Breakthrough in the filed of ... have accelerated the rapid growth of ...
+
+
+****   收入原因
+The changes primarily concerned with the income levels of ..., reflecting the improvement of economic conditions. As a result, ... are now financially better off and can comfortably afford to purchase ...
+
+****   意识原因
+- The changes are also closely related to heightened awareness of ..., who, owing to their improved education levels, now have a deeper understanding and appreciation of the significance of ...
+- This increased awareness has led to a greater emphasis on ...
+
+****   政策原因
+- The changes / differences are closely linked to the policy of ... , which has a profound impact, (fostering economic growth and cultural exchange). Consequently, the transformations observed are deeply related to this key policy.
+- The changes / differences are closely related to the policy of ...
+****   负面原因
+Many ..., if not most, have poured great attention into the development of ..., treated as ..., but are blind to ... In other words, they focus intently on advancements, seeing them as essential for ..., yet overlook the consequences that these ... may bring.
+
+** 展望未来
+- From the analyses made above, we can conclude that the trend depicted in the table / graph / table/ chart, with the further growth in the economy and more changes occurring, will likely persist and continue in a more favorable direction.
+
+- From the analyses made above, we can conclude that as the economy expands and evolves, the positive momentum indicated by the data will not only maintain its course but also potentially accelerate, pointing towards overall improvement and progress.

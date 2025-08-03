@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       9bfcec40-bbfc-41c4-b9cf-e351a7b315e7
+:END:
+#+title: 存储器
+#+filetags: :CACHE STROAGE:

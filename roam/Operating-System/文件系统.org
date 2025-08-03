@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       4b39d996-7899-48e6-9faa-17e8e1294029
+:END:
+#+title: 文件系统
+#+filetags: :FILE-SYSTEM:
+#+STARTUP: overview
+
+* 全局结构
+[[file:pic/文件系统全局结构.png]]
+
+* 在外存中的结构
+
+* 在内存中的结构

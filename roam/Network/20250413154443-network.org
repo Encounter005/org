@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       1a5a7b80-5fa0-46cc-9bbf-4fb182694b23
+:END:
+#+title: network
+#+filetags: :NETWORK:

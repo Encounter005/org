@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e11af172-ca7b-49c4-9509-11e6c5e43120
+:END:
+#+title: 总线
+#+filetags: :BUS:
+
+[[id:b70e63fa-e006-4e24-9cec-51e6827db3f4][总线概述]]
+
+[[id:4781d895-697e-4719-8536-651a3a26397d][总线仲裁]]

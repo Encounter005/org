@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       81834c8a-981a-4898-afb8-6e94354f3e31
+:END:
+#+title: Computer-Organization
+#+filetags: :Computer-Organization:
+
+
+[[id:e11af172-ca7b-49c4-9509-11e6c5e43120][总线]]
+
+[[id:58b0d70b-b33e-4467-8dcd-2465953f7f08][IO系统]]

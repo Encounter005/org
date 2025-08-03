@@ -1,0 +1,124 @@
+:PROPERTIES:
+:ID:       6487390b-63bc-4eac-a604-6269ad209f3b
+:END:
+#+title: 小作文笔记
+#+filetags: :Writing:
+
+90-110 words
+
+* 类型&格式
+
+** 格式
+
+Dear__ Sir or Madam | Sir | Professor | Mr. | Editor | Headmaster | classmates | International Students | Jack | Mary
+
+** 具体类型
+- letter / mail / email / note 书信
+- 类型
+  - 申请 apply
+  - 感谢 thanks / gratitude
+  - 祝贺 congratulations
+  - 致歉 apologize(v.) apologies(n.)
+  - 询问 ask for = inquire into
+  - 投诉 complain(v.) complaint(n.)
+  - 建议 suggestion / advice / propose / recommend / encourage / advocate
+- 正式（公务）
+- 非正式（私人）
+
+** 第一段
+
+*** 自我介绍
+  1. Being a senior from a prestigious university.
+  2. Being a regular customer of your store,
+  3. Being a chairman of the Students' Union
+
+*** 寒暄
+1. Long time no see! Is everything going well with you?
+2. I have been back to China safe and sound. | I have back home safe and sound.
+3. I am () to 听说(know / learn) that()
+
+*** 写信目的
+1. I am writing to ()
+2. for the purpose of ()
+3. with the hope of ()
+
+*** 申请、求职、求学、志愿者、加入团体、奖学金
+apply for a precious opportunity to work in _your company_ that enjoys years of reputation | study in _your school_ | be a volunteer | be a member of _your group_ | get the scholarship
+
+*** 致歉、感谢、祝贺
+express my sincere thanks / gratitude / congratulations / apologies for ()
+
+- convey = extend ~ voice ~ air
+- heartfelt = deep and genuine
+
+
+*** 投诉、抱怨 + 质量差、环境差、服务差
+complain about = make a complaint about the poor / quality / service / enviroment of 地点 that enjoys years of reputation
+
+*** 建议
+put forward some advice regarding / concerning ()
+
+- give | provide | offer
+- a couple of | several | concrete
+- suggestion | tips
+
+*** 邀请
+invite you to take part in () that is to be held in 地点 next Monday
+
+*** 询问
+ask for some information
+ask for your help
+***  倡议
+encouage / advocate
+
+** 第二段
+- 总分结构
+  1. I do believe that he is eligible for the job. Firstly, his major is () and he is expected to graduate next June. Additionally, not only does he have excellent academic performance, but also he possesses rich working experience. Lastly, his team spirit and communicative skills are appropriate for the post.
+  2. There are two major reasons for my quitting / leaving / resignation. Firstly, I have entered for the Postgraduate Entrance Examination and I am occupied by reviewing books as well as materials. It is of great importance to me because it is closely related to my future career development. Secondly, my father is on business and my mother is ill. I have to stay at home to look after my little sister
+  3. Here are some tips for your recovery. Firstly, you had better drink more water and take medicine on time as the doctor asked. Secondly, it is wise for you to relax yourself by listening to music and going out for a walk. Plus, don't worry about the missing courses. I will help you review them after you get better.
+     + enter for some training courses and learn new knowledge to improve your abilities.
+     + have a trip, enjoy beautiful scenery and make new friends.
+
+
+
+** 第三段
+1. Please allow me to say _thanks / congratulations / sorry_ once again. I am looking forward to your reply.
+2. Thanks for taking time to read my letter. I am looking forward to your reply. = I really appreciate _your_ taking time to read my letter.
+3. I am looking forward to your reply. Best wishes!
+
+** 署名
+Yours truly,
+Zhang Wei
+
+
+
+
+* 推荐信
+
+Directions:
+     Suppose you read today's newspaper and know a company is looking for a part-time salesman. Now write a letter to apply.
+     Write nearly about 100 words on the Answer Sheet.
+     Don't use your own name. Use "Li Ming"
+     Don't write the address.
+
+- [[*自我介绍][自我介绍]] + 抄题目 + 写信目的
+  Dear Sir or Madam
+        Being a senior from prestigious university, I am more than delighted to knew your company is looking for a part-time salesman, so I am writing to apply for the position
+  - more than delighted to / exceedingly excited / very sorry to know
+  - , so
+-
+
+
+
+* 致歉信
+Directions:
+        Suppose one of your friends will hold a birthday party, and invite you. Write an email to reply.
+
+ - 寒暄 + 超题目 + 写作目的
+
+* 慰问信
+Directions:
+        Suppose one of your classmates has been ill for several days, and now write _him_ a mail.
+
+Dear Jack,
+        I am sorry to know that you have been ill for several days, so I am writing to _express my concers. | ask if you are feeling better_

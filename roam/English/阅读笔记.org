@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       0e17d4fe-f2b7-4ee8-8f0b-c1b6e3e02ac5
+:END:
+#+title: 阅读笔记
+#+filetags: :Reading:
+
+* 态度题
+** 全文态度题
+***  选项词汇
+- 正面
+  1. positive
+  2. optimistic
+  3. approval
+  4. supportive
+  5. consent
+  6. confident
+  7. sympathetic(同情的、支持的)
+- 负面
+  1. negative
+  2. pessimistic
+  3. disapproval
+  4. skeptical
+  5. questionable
+  6. resent
+- 中立
+  1. objective
+  2. neutral
+  3. impartial
+  4. unbiased
+  5. disinterested(公正)
+- 必错
+  1. 漠不关心
+     1. indifferent
+     2. uninterested
+     3. unconcerned
+  2. 困惑不解
+     1. ambiguous
+     2. confused
+     3. puzzled
+     4. vague
+  3. 主观有偏见
+     1. biased
+     2. prejudice
+     3. subjective
+     4. contemptuous
+***   解题三宝
+1. 形容词和副词
+2. 情态动词
+3. 大写转折词
+
+
+** 区域态度题（不是最后一道题）
++ 相当于找作者观点的细节题
+
+1. 首先通过关键词定位找到关键句
+2. 然后观察关键句周围有无出现：
+  1. 形容词和副词
+  2. 情态动词
+  3. 大写转折词
+
+
+* 语义题
+
+- 句内或句间的逻辑关系
+- 句子之间的逻辑关系
+  - 只要 _没有出现大写句首转折词_ ，前后直接画等号，逻辑相同
+  - 只要 _出现大写句首转折词_ ，前后句之间逻辑、语义、感情相反
+
+* 例证题
+例子本身不重要，重要的是找到例子支撑的观点
+观点要么在例子的前一句话（80%），要么在例子的后一句话
+
+* 单词
+
+- lame adj. 瘸的 有缺陷的
+  1. lameness n. 缺陷
