@@ -7,3 +7,5 @@
 [[id:9053e8f6-74fa-49cc-9c71-2cdbe70b193b][operating system memory manage]]
 
 [[id:a1286a89-8a08-4844-b263-b366d2b15eb9][operating system IO manage]]
+
+[[id:634549dd-1ab2-459e-b506-bb465a0a80c1][operating system file manage]]

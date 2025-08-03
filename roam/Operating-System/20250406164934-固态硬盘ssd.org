@@ -4,6 +4,8 @@
 #+title: 固态硬盘SSD
 #+STARTUP:overview
 
+[[file:/home/encounter/org/roam/Operating-System/pic/SSD.png]]
+
 * 原理
 
 基于闪存技术，属于电可擦除ROM，EEPROM
@@ -30,3 +32,7 @@
 - 思想： 将“擦除”平均分配到各个块上，以延长使用寿命
 - 动态磨损均衡： 写入数据时，优先动态选累计擦除次数少的新闪存块
 - 静态磨损均衡： SSD检测并自动进行数据的分配、迁移，让老旧的闪存块承担无需写数据的存储任务，让较新的存储块承担写任务
+
+
+
+
