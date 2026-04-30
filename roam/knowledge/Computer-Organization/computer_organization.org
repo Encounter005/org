@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       81834c8a-981a-4898-afb8-6e94354f3e31
+:END:
+#+title: Computer-Organization
+#+filetags: :Computer-Organization:
+
+
+[[id:e11af172-ca7b-49c4-9509-11e6c5e43120][总线]]
+[[id:58b0d70b-b33e-4467-8dcd-2465953f7f08][IO系统]]
+[[id:894d4888-bfac-41e4-9df5-ee402a507ec6][存储器概述]]
+[[id:3f95a98f-9179-427c-848e-cdcfae6ad6a8][半导体随机存储器]]
+[[id:9bfcec40-bbfc-41c4-b9cf-e351a7b315e7][存储器]]
+[[id:69d99a23-5c87-4804-8bc9-3663afae5c99][定点数的表示与运算]]

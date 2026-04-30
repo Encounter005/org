@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       ee08f92f-82ba-4e22-9cc2-17443ffa1bf4
+:END:
+#+title:  Network
+#+filetags: :NETWORK:
+
+[[id:6ae66653-ae43-47c6-b6e6-e9852d26ea4d][奈奎斯和香农定理]]
+[[id:aed545c9-f306-4703-8244-1db3aa670627][编码与调制]]
+

@@ -1,0 +1,86 @@
+:PROPERTIES:
+:ID:       05da6065-a5fc-4ed2-b46f-248910f4d1ba
+:END:
+#+title: python-if condition
+#+filetags: :python:if-condition:
+
+* 条件判断
+** 单分支
+#+begin_src plaintext
+# 语法
+if 条件表达式:
+    满足条件时执行的代码块（缩进）
+
+# 示例：判断是否成年
+age = 19
+if age >= 18:
+    print("你已成年，可独立出行")
+#+end_src
+** 双分支
+#+begin_src plaintext
+# 语法
+if 条件表达式:
+    满足条件执行的代码块
+else:
+    不满足条件执行的代码块
+
+# 示例：判断是否成年
+age = int(input("请输入你的年龄："))
+if age >= 18:
+    print("你已成年，可观看此电影")
+else:
+    print("你未成年，需由监护人陪同")
+#+end_src
+** 多分支
+#+begin_src plaintext
+# 语法
+if 条件表达式1:
+    满足条件1执行的代码块
+elif 条件表达式2:
+    满足条件2执行的代码块
+elif 条件表达式3:
+    满足条件3执行的代码块
+...
+else:
+    所有条件都不满足时执行的代码块
+
+# 示例：成绩评级
+score = float(input("请输入你的考试成绩："))
+if score >= 90:
+    print("成绩评级：优秀")
+elif score >= 80:
+    print("成绩评级：良好")
+elif score >= 70:
+    print("成绩评级：中等")
+elif score >= 60:
+    print("成绩评级：及格")
+else:
+    print("成绩评级：不及格，需要补考")
+#+end_src
+** 嵌套分支
+#+begin_src python :results output
+# 示例：判断是否能参加驾照考试
+age = int(input("请输入你的年龄："))
+if age >= 18:
+    print("你满足年龄要求，可报名驾照考试")
+    height = float(input("请输入你的身高（cm）："))
+    if height >= 150:
+        print("身高符合要求，可正常报名")
+    else:
+        print("身高未达到要求，无法报名")
+else:
+    print("年龄未达标，无法报名驾照考试")
+#+end_src
+** 三元表达式
+#+begin_src python :results output
+# 示例：简化判断成年与否
+age = 20
+result = "成年" if age >= 18 else "未成年"
+print(f"你是：{result}")
+
+# 等价于原双分支代码
+if age >= 18:
+    result = "成年"
+else:
+    result = "未成年"
+#+end_src

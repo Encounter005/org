@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       830166c4-a1b4-4f5c-a47d-3346cfa3c135
+:END:
+#+title: Knowledge
+#+filetags: :Knowledge:
+
+[[id:81834c8a-981a-4898-afb8-6e94354f3e31][Computer-Organization]]
+[[id:f5c7c1bd-4881-4053-8398-30a57044a7dd][operating system]]
+[[id:ee08f92f-82ba-4e22-9cc2-17443ffa1bf4][Network]]
+[[id:ffc8d768-8520-4b0e-bf26-6eee2852dfc2][English]]

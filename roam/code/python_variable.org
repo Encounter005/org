@@ -1,0 +1,133 @@
+:PROPERTIES:
+:ID:       8febe19b-7c66-4671-832b-2a40acff44e7
+:END:
+#+title: python-variable
+#+filetags: :python:variable:
+
+* 基本数据类型
+| 整数（int）     | 无小数的数字                | age = 20                            |
+|-----------------+-----------------------------+-------------------------------------|
+| 浮点数（float） | 带小数的数字                | price = 19.9                        |
+| 字符串（str）   | 文本内容（单 / 双引号包裹） | name = "Python"                     |
+| 布尔值（bool）  | 逻辑值（True/False）        | is_ok = True                        |
+| 列表（list）    | 有序可变集合                | nums = [1,2,3]                      |
+| 元组（tuple）   | 有序不可变集合              | info = ("张三", 20)                 |
+| 字典（dict）    | 键值对集合                  | student = {"name":"李四", "age":19} |
+
+* 类型检测
+
+#+begin_src python :results output
+# 方法1：type()函数
+age = 18
+print(type(age))  # <class 'int'>
+
+# 方法2：isinstance()函数（推荐）
+print(isinstance(age, int))  # True
+print(isinstance(age, str))  # False
+#+end_src
+
+* 输入输出
+** 格式化输出
+*** f-string
+#+begin_src python :results output
+name = "李四"
+age = 20
+score = 95.5
+# 基础用法
+print(f"姓名：{name}，年龄：{age}，成绩：{score}")
+# 格式控制（保留2位小数）
+print(f"成绩：{score:.2f}")
+# 数字补零（6位宽度）
+print(f"学号：{1:06d}")  # 输出：000001
+#+end_src
+*** format()
+#+begin_src python :results output
+print("姓名：{}，年龄：{}".format(name, age))
+# 指定位置
+print("年龄：{1}，姓名：{0}".format(name, age))
+# 格式控制
+print("成绩：{:.2f}".format(score))
+#+end_src
+*** 占位符
+#+begin_src python :results output
+print("姓名：%s，年龄：%d，成绩：%.2f" % (name, age, score))
+#+end_src
+** 转义字符
+| 转义符 | 功能               |
+|--------+--------------------|
+| \n     | 换行               |
+| \t     | 制表符（4 个空格） |
+| \      | 反斜杠本身         |
+| "      | 双引号             |
+| '      | 单引号             |
+
+示例
+#+begin_src python :results output
+print("姓名：{}\t年龄：{}\n成绩：{:.2f}".format(name, age, score))
+# 自定义print结束符（默认\n）
+print("Hello", end=" ")
+print("Python")  # 输出：Hello Python
+#+end_src
+
+**  输入函数 input()
+#+begin_src python :results output
+# NOTE: 所有输入均是字符串
+# 基础用法
+name = input("请输入您的姓名：")
+age = input("请输入您的年龄：")
+print(f"您输入的姓名：{name}，年龄：{age}")
+
+# 带提示的输入
+phone = input("请输入您的手机号：")
+print(f"手机号：{phone}，类型：{type(phone)}")
+#+end_src
+
+** 数据类型转换
+| 函数     | 功能             | 示例               |
+|----------+------------------+--------------------|
+| int(x)   | 转换为整数       | int("100") → 100   |
+| float(x) | 转换为浮点数     | float("9.9") → 9.9 |
+| str(x)   | 转换为字符串     | str(18) → "18"     |
+| eval(x)  | 执行字符串表达式 | eval("1+2") → 3    |
+
+** 运算符
+*** 算术运算符
+| 运算符 | 描述               | 示例          |
+|--------+--------------------+---------------|
+| +      | 加法               | 10 + 20 → 30  |
+| -      | 减法               | 20 - 10 → 10  |
+| *      | 乘法               | 10 * 20 → 200 |
+| /      | 除法（返回浮点数） | 20 / 10 → 2.0 |
+| //     | 整除（向下取整）   | 21 // 10 → 2  |
+| %      | 取模（余数）       | 21 % 10 → 1   |
+| **     | 幂运算             | 2 ** 3 → 8    |
+
+*** 赋值运算符
+| 运算符 | 描述       | 示例               |
+|--------+------------+--------------------|
+| =      | 基础赋值   | x = 10             |
+| +=     | 加后赋值   | x += 5 → x = x + 5 |
+| -=     | 减后赋值   | x -= 5 → x = x - 5 |
+| *      | 乘后赋值   | x *= 5 → x = x * 5 |
+| /=     | 除后赋值   | x /= 5 → x = x / 5 |
+| //=    | 整除后赋值 | x //= 5 → x = x // 5 |
+| %=     | 取模后赋值 | x %= 5 → x = x % 5 |
+| **=    | 幂后赋值   |  x = 5 → x = x  5                  |
+
+*** 比较运算符
+| 运算符 | 描述     | 示例            |
+|--------+----------+-----------------|
+| ==     | 等于     | 10 == 10 → True |
+| !=     | 不等于   | 10 != 20 → True |
+| >      | 大于     | 20 > 10 → True  |
+| <      | 小于     | 10 < 20 → True  |
+| >=     | 大于等于 | 20 >= 10 → True |
+| <=     | 小于等于 |  10 <= 20 → True               |
+
+*** 逻辑运算符
+| 运算符 | 描述               | 示例                      |
+|--------+--------------------+---------------------------|
+| and    | 逻辑与（都真才真） | (10>5) and (20>10) → True |
+| or     | 逻辑或（有真就真） | (10>5) or (20<10) → True  |
+| not    | 逻辑非（取反）     |  not (10>5) → False                         |
+

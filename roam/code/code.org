@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       be79b0b4-8e26-42ca-ad71-ad7c107a2188
+:END:
+#+title: Code
+#+filetags: :Code:
+
+[[id:1ee6b45f-50de-4e92-91a2-a6fc8856470b][python-grammar]]

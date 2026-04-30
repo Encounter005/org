@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       1ee6b45f-50de-4e92-91a2-a6fc8856470b
+:END:
+#+title:  python-grammar
+#+filetags: :python:
+
+
+[[id:8febe19b-7c66-4671-832b-2a40acff44e7][python-variable]]
+[[id:05da6065-a5fc-4ed2-b46f-248910f4d1ba][python-if condition]]
+[[id:61aa023e-2c1e-4816-a9b7-2383d7421030][python-loop]]
+[[id:69387d42-c46e-4b17-808c-f20a558f8291][python-DataStructure]]

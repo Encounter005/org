@@ -1,0 +1,200 @@
+:PROPERTIES:
+:ID:       61aa023e-2c1e-4816-a9b7-2383d7421030
+:END:
+#+title: python-loop
+#+filetags: :python:loop:
+* 循环
+** while
+#+begin_src python :results output
+# 演示 while循环
+"""
+while 判断条件:
+    # 当条件满足 需要执行的内容
+
+说明:
+    while: 实现循环操作的关键字
+    条件判断: 是否进入循环的依据
+        当条件成立, 就执行循环里面的内容, 条件一直成立 就一直循环执行内部的代码 直到条件不成立
+"""
+
+# 需求: 请循环 打印 5次  Python真有趣
+# 1- 定义计数器
+num = 1
+
+# 2- 编写循环操作
+while num <= 5:
+    # 2.1 执行循环的主体代码
+    print("Python真有趣")
+
+    # 2.2 更新计数器 +1
+    # num = num + 1
+    num += 1
+#+end_src
+#+begin_src python
+# 猜数字
+import random
+
+while True:
+    ans = int(random.random() * 10)
+    while True:
+        guess = int(input("Please enter a num (1, 10): "))
+        if ans > guess:
+            print("please input greater")
+        elif ans < guess:
+            print("please input lower")
+        else:
+            print("great")
+            break
+#+end_src
+** do while
+#+begin_src python 
+#+end_src
+** for
+#+begin_src python :results output
+# 演示: for基本使用
+"""
+    语法格式:  
+        for 临时变量 in 序列:
+            循环执行的代码块
+        
+        注意:
+            临时变量的值 其实 就是 序列中每一个元素，循环次数等于序列的长度
+"""
+# 需求: 遍历一个字符串 :  python 
+for char in "python":
+    print(char)
+#+end_src
+#+begin_src python
+'''
+演示双层循环实现九九乘法表
+'''
+
+'''
+双层循环，如果内层循环使用了break，break只能跳出
+它所在的循环，也就是内层循环
+'''
+
+'''
+需求：
+实现九九乘法表
+思路:
+1. 变量row控制行号,row从1到9结束,[1,9]
+2. 变量col控制列号，col从1开始回到当前行号结束，[1,row]
+3. 用外层循环控制行号的变化，内层循环控制列号的变化
+for row in range(1,10):
+    for col in range(1,row+1):
+        pass
+'''
+for row in range(1,10):
+    for col in range(1,row+1):
+        # print(f'当前行号{row},当前列号{col}')
+        print(f'{col} * {row} = {row * col}',end='\t')
+    # print()默认输出换行符
+    print()
+
+print('#'*100)
+'''
+要求九九乘法表最多只输出到第3列
+思路：
+col为4的时候结束内层循环即可，外层循环继续
+'''
+for row in range(1,10):
+    for col in range(1,row+1):
+        # print(f'当前行号{row},当前列号{col}')
+        print(f'{col} * {row} = {row * col}',end='\t')
+        # 当col为4的时候结束内层循环，跳转到外层循环
+        if col == 4:
+            # break只能跳出它所在的循环(离他最近的循环)
+            break
+    # print()默认输出换行符
+    print()
+print('#'*100)
+#+end_src
+*** for-else
+#+begin_src python
+# 演示: for循环结合else情况
+"""
+    语法:
+        for 临时变量 in  序列:
+            循环体
+        else:
+            当循环正常结束后, 需要执行的代码
+
+    如果for循环中,
+        通过break退出的循环, 那么就不会执行else语句的内容
+        通过continue跳过当前循环, 对于else 不会有影响的
+        在循环过程中程序出现异常(程序异常结束), else也不会执行
+"""
+# 需求: 循环输出从 1~6, 当循环正常结束后, 打印 循环完成
+for i in range(1,7):
+    # 当循环到3的时候, 强制退出循环（注释后可测试正常情况）
+    # if i == 3:
+    #     break
+
+    # 当循环到3的时候, 跳过当前循环 进入下一次循环
+    # if i == 3:
+    #     continue
+    # 异常情况（注释后可测试正常情况）
+    # 1/0
+    print(i)
+else:
+    print("循环结束了.....")
+#+end_src
+** range
+#+begin_src python :results output
+# 演示 range函数
+# 作用: 帮我们生成一个连续的数字, 例如 0~3
+# 语法:  range(起始值,结束值,步长)
+#  起始值: 默认为  0   结束值: 必填的  在生成序列的时候, 不含结束值  步长: 默认为1 表示 数字与数字之间的间隔
+# 需求: 生成 4以内的序列, 并且将每一个值打印出来
+for num in range(0,4):
+    print(num)
+#+end_src
+** continue
+#+begin_src python
+# 演示 continue:  跳过本次循环, 进入下一次循环
+
+# 需求: 遍历从  1 ~ 50 , 要求 如果遍历的值能够被 6 整除  将该值直接跳过不打印
+# 1- 定义计数器
+i = 1
+
+# 2- 编写循环
+while i <= 50:
+    # 循环的主体内容
+    # 如果能够被6整除, 将该值跳过 不打印
+    if i % 6 == 0:
+        # 更新计数器: 必须在continue前更新，否则会出现死循环
+        i += 1
+        continue
+
+    print(i)
+
+    # 3- 更新计数器
+    i += 1
+
+# 退出循环后, 执行后续的代码
+print("循环执行完毕")
+#+end_src
+** break
+#+begin_src python
+# 演示 break:  实现中断循环 直接退出循环操作
+# 需求: 遍历从  1 ~ 50 , 要求 一旦值能够被15整除(除 15  余数为 0) 立即退出循环
+# 1- 定义计数器
+i = 1
+
+# 2- 编写循环
+while i <= 50:
+    # 循环的主体内容
+    # 如果值能够被15整除, 退出循环
+    if i % 15 == 0:
+        break
+
+    print(i)
+
+    # 3- 更新计数器
+    i += 1
+
+# 退出循环后, 执行后续的代码
+print("循环已终止，退出程序")
+#+end_src
+
