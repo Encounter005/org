@@ -2,6 +2,7 @@
 :ID:       05da6065-a5fc-4ed2-b46f-248910f4d1ba
 :END:
 #+title: python-if condition
+#+startup: overview
 #+filetags: :python:if-condition:
 
 * 条件判断

@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       b9b79e01-6ffc-465d-b9f1-bda9f06ac437
+:END:
+#+title: python-module
+#+startup: overview
+#+filetags: :python:module:
+
+* 模块
+Python 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。模块让你能够有逻辑地组织你的 Python 代码段。
+例如我们在test.py写入一个函数
+#+begin_src python :results output
+# File: test.py
+def num_add(a:int, b:int)->int:
+    return a + b
+#+end_src
+
+然后我们在main.py调用这个函数
+#+begin_src python :results output
+import test
+a = 10
+b = 20
+print(test.num_add(a, b))
+#+end_src
+
+** import
+ 当解释器遇到 import 语句，如果模块在当前的搜索路径就会被导入。搜索路径是一个解释器会先进行搜索的所有目录的列表。
+** from ... import
+Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：
+#+begin_src
+from modname import name1[, name2[, ... nameN]]
+#+end_src
+
+#+begin_src python :results output
+from test import num_add
+
+a = 10
+b = 20
+
+print(num_add(a, b))
+#+end_src
+
+我们可以通过 =from ... import* 来引入一个模块中所有的函数以及类=
+** 搜索路径
+当你导入一个模块，Python 解析器对模块位置的搜索顺序是：
+1. 当前目录
+2. 通过环境变量 =PYTHONPATH= 下的每个目录
+3. 如果都找不到，python会查看默认路径，一般是 =/usr/local/lib/python= 
+
+* dir()
+可以通过dir()来查看一个模块里所有定义的东西
+#+begin_src python :results output
+import math
+print(dir(math))
+#+end_src
+
+* python包结构
+包是一个分层次的文件目录结构，它定义了一个由模块及子包，和子包下的子包等组成的 Python 的应用环境。
+简单来说，包就是文件夹，但该文件夹下必须存在 __init__.py 文件, 该文件的内容可以为空。__init__.py 用于标识当前文件夹是一个包。
+考虑一个在 package_runoob 目录下的 runoob1.py、runoob2.py、__init__.py 文件，test.py 为测试调用包的代码，目录结构如下：
+#+begin_src
+test.py
+package_runoob/
+|-- __init__.py
+|-- runoob1.py
+|-- runoob2.py
+#+end_src
+

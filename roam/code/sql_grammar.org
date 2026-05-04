@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       a98e7cea-3283-4ef2-9537-93ec00cbea34
+:END:
+#+title: sql-grammar
+#+startup: overview
+#+filetags: :sql:
+
+[[id:f2d8a2a1-9dd4-4dca-9478-eebd34720404][sql-event]]
+[[id:73ee590b-9eb8-4549-9911-274aa674a0d1][sql-view]]
+[[id:be78d935-568b-4778-8ecd-ac3d06095572][sql-index]]
+[[id:804cfd39-5b1c-4bff-8b91-cd6e6c99ff92][sql-trigger]]
+[[id:42b7c40d-9142-4042-85b5-5414b6fec476][sql-basic]]

@@ -2,6 +2,7 @@
 :ID:       69387d42-c46e-4b17-808c-f20a558f8291
 :END:
 #+title: python-DataStructure
+#+startup: overview
 #+filetags: :python:DataStructure:
 
 * 列表
@@ -454,5 +455,37 @@ for item in items:
     print(f'{item[0]}, {item[1]}')
 #+end_src
 
+* 字符串
+** 字符串格式化
+#+begin_src python :results output
+print ( "My name is %s and weight is %d kg!" % ('Zara', 21) ) 
+#+end_src
 
+#+RESULTS:
+: My name is Zara and weight is 21 kg!
+** 三引号
+#+begin_src python :results output
+ errHTML = '''
+<HTML><HEAD><TITLE>
+Friends CGI Demo</TITLE></HEAD>
+<BODY><H3>ERROR</H3>
+<B>%s</B><P>
+<FORM><INPUT TYPE=button VALUE=Back
+ONCLICK="window.history.back()"></FORM>
+</BODY></HTML>
+'''
+#+end_src
 
+** api
+| 函数名                                              | 描述                                                                                                                    |
+|-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------|
+| string.capitalize()                                 | 把字符串的第一个字符大写                                                                                                |
+| string.find(str, beg=0, end=len(string))            | 检测 str 是否包含在 string 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1 |
+| string.index(str, beg=0, end=len(string))           | 跟find()方法一样，只不过如果str不在 string中会报一个异常.                                                               |
+| string.isalnum()                                    | 如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False                                          |
+| string.isalpha()                                    | 如果 string 至少有一个字符并且所有字符都是字母则返回 True,否则返回 False                                                |
+| string.join(seq)                                    | 以 string 作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串                                             |
+| string.lower()                                      | 转换 string 中所有大写字符为小写.                                                                                       |
+| string.replace(str1, str2,  num=string.count(str1)) | 把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次                                                      |
+| string.split(str="", num=string.count(str))         | 以 str 为分隔符切片 string，如果 num 有指定值，则仅分隔 num+1 个子字符串                                                |
+| string.upper()                                      | 转换 string 中的小写字母为大写                                                                                          |

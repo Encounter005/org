@@ -2,6 +2,7 @@
 :ID:       61aa023e-2c1e-4816-a9b7-2383d7421030
 :END:
 #+title: python-loop
+#+startup: overview
 #+filetags: :python:loop:
 * 循环
 ** while

@@ -1,0 +1,294 @@
+:PROPERTIES:
+:ID:       d159e9cc-764a-4f1d-944b-03a3c884a6ea
+:END:
+#+title: python-oop
+#+startup: overview
+#+filetags: :python:oop:
+
+* 类定义
+#+begin_src 
+class ClassName:
+    <statement-1>
+    .
+    .
+    .
+    <statement-N>
+#+end_src
+* 类对象
+#+begin_src python :results output
+class TestClass:
+    i = 12345
+
+    def f(self):
+        return "hello world"
+
+
+x = TestClass()
+print(x.f())
+print(x.i)
+#+end_src
+
+#+RESULTS:
+: hello world
+: 12345
+** 初始化
+类有一个名为 __init__() 的特殊方法（构造方法），该方法在类实例化时会自动调用，像下面这样：
+#+begin_src
+def __init__(self):
+    self.data = []
+
+#+end_src
+
+__init()__函数可以有参数
+#+begin_src python :results output
+class Complex:
+    def __init__(self, realpart, imagpart):
+        self.r = realpart
+        self.i = imagpart
+x = Complex(3.0, -4.5)
+print(x.r, x.i)   # 输出结果：3.0 -4.5
+#+end_src
+
+#+RESULTS:
+: 3.0 -4.5
+
+可以把self当成this指针来看
+
+* 类方法
+在类的内部，使用 def 关键字来定义一个方法，与一般函数定义不同，类方法必须包含参数 self, 且为第一个参数，self 代表的是类的实例。 
+#+begin_src python :results output
+class people:
+    #public
+    name = ""
+    age = 0
+    address = ""
+    # private
+    __weight = 0
+    # constructor
+    def __init__(self, name, age, address, weight) -> None:
+        self.name = name
+        self.age = age
+        self.address = address
+        self.__weight = weight
+
+    def speak(self):
+        print("%s say: i am %d years old" % (self.name, self.age))
+
+
+p = people("encounter", 10, "US", 100)
+p.speak()
+#+end_src
+
+* 继承
+** 单继承
+派生类的定义如下所示:
+#+begin_src
+class DerivedClassName(BaseClassName):
+    <statement-1>
+    .
+    .
+    .
+    <statement-N>
+#+end_src
+
+#+begin_src python :results output
+class people:
+    name = ""
+    age = 0
+    address = ""
+    # private
+    __weight = 0
+
+    def __init__(self, name, age, address, weight) -> None:
+        self.name = name
+        self.age = age
+        self.address = address
+        self.__weight = weight
+
+    def speak(self):
+        print("%s say: i am %d years old" % (self.name, self.age))
+
+
+class student(people):
+    grade = ""
+
+    def __init__(self, name, age, address, weight, grade) -> None:
+        super().__init__(name, age, address, weight)
+        self.grade = grade
+
+    def speak(self):
+        print("%s say: i am %d years old, i am %s" % (self.name, self.age, self.grade))
+
+
+stu = student("encounter", 10, "us", 10, "10")
+stu.speak()
+#+end_src
+
+** 多继承
+多继承的类定义形如下例:
+#+begin_src
+class DerivedClassName(Base1, Base2, Base3):
+    <statement-1>
+    .
+    .
+    .
+    <statement-N>
+#+end_src
+#+begin_src python :results output
+class people:
+    name = ""
+    age = 0
+    address = ""
+    # private
+    __weight = 0
+
+    def __init__(self, name, age, address, weight) -> None:
+        self.name = name
+        self.age = age
+        self.address = address
+        self.__weight = weight
+
+    def speak(self):
+        print("%s say: i am %d years old" % (self.name, self.age))
+
+
+class student(people):
+    grade = ""
+
+    def __init__(self, name, age, address, weight, grade) -> None:
+        super().__init__(name, age, address, weight)
+        self.grade = grade
+
+    def speak(self):
+        print("%s say: i am %d years old, i am %s" % (self.name, self.age, self.grade))
+
+
+class speaker:
+    topic = ""
+    name = ""
+
+    def __init__(self, topic, name) -> None:
+        self.name = name
+        self.topic = topic
+
+    def speak(self):
+        print(
+            "my name is: %s, i am a speaker, my topic is: %s" % (self.name, self.topic)
+        )
+
+
+class sample(speaker, student):
+    a = ""
+
+    def __init__(self, name, topic, age, address, weight, grade) -> None:
+        student.__init__(self, name, age, address, weight, grade)
+        speaker.__init__(self, name, topic)
+
+
+test = sample("encounter", "title", 10, "us", 100, "10")
+# NOTE:方法名同，默认调用的是在括号中参数位置排前父类的方法
+test.speak()
+#+end_src
+
+* 方法重写
+如果你的父类方法的功能不能满足你的需求，你可以在子类重写你父类的方法，实例如下：
+#+begin_src python :results output
+#!/usr/bin/python3
+ 
+class Parent:        # 定义父类
+   def myMethod(self):
+      print ('调用父类方法')
+ 
+class Child(Parent): # 定义子类
+   def myMethod(self):
+      print ('调用子类方法')
+ 
+c = Child()          # 子类实例
+c.myMethod()         # 子类调用重写方法
+super(Child,c).myMethod() #用子类对象调用父类已被覆盖的方法
+#+end_src
+
+* 类属性与方法
++ 私有属性
+  __private_attrs：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 self.__private_attrs
++ 私有方法
+  __private_method：两个下划线开头，声明该方法为私有方法，只能在类的内部调用 ，不能在类的外部调用。self.__private_methods。 
+
+#+begin_src python :results output
+class JustCounter:
+    __secretCount = 0
+    publicCount = 0
+
+    def count(self):
+        self.__secretCount += 1
+        self.publicCount += 1
+        print(self.__secretCount)
+
+
+class Site:
+    def __init__(self, name, url):
+        self.name = name  # public
+        self.__url = url  # private
+
+    def who(self):
+        print("name  : ", self.name)
+        print("url : ", self.__url)
+
+    def __foo(self):  # 私有方法
+        print("这是私有方法")
+
+    def foo(self):  # 公共方法
+        print("这是公共方法")
+        self.__foo()
+
+
+def main():
+    counter = JustCounter()
+    counter.count()
+    counter.count()
+    # FIXME:报错，实例不能访问私有变量
+    # print(counter.__secretCount)
+    print(counter.publicCount)
+    x = Site("菜鸟教程", "www.runoob.com")
+    x.who()  # 正常输出
+    x.foo()  # 正常输出
+    x.__foo()  # 报错
+
+
+if __name__ == "__main__":
+    main()
+#+end_src
+
+* 运算符重载
+| 函数名字 | 描述     |
+|----------+----------|
+| __cmp__    | 比较运算 |
+| __add__    | 加运算   |
+| __sub__    | 减运算   |
+| __mul__    | 乘运算   |
+| _truediv__ | 除运算   |
+| __mod__    | 求余运算 |
+| __pow__    | 乘方     |
+
+
+#+begin_src python :results output
+#!/usr/bin/python3
+ 
+class Vector:
+   def __init__(self, a, b):
+      self.a = a
+      self.b = b
+ 
+   def __str__(self):
+      return 'Vector (%d, %d)' % (self.a, self.b)
+   
+   def __add__(self,other):
+      return Vector(self.a + other.a, self.b + other.b)
+ 
+v1 = Vector(2,10)
+v2 = Vector(5,-2)
+print (v1 + v2)
+#+end_src
+
+#+RESULTS:
+: Vector (7, 8)

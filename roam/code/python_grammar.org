@@ -9,3 +9,7 @@
 [[id:05da6065-a5fc-4ed2-b46f-248910f4d1ba][python-if condition]]
 [[id:61aa023e-2c1e-4816-a9b7-2383d7421030][python-loop]]
 [[id:69387d42-c46e-4b17-808c-f20a558f8291][python-DataStructure]]
+[[id:56cedcd7-e6e7-46b2-8935-fc5ffff689dd][python-function]]
+[[id:b9b79e01-6ffc-465d-b9f1-bda9f06ac437][python-module]]
+[[id:67304125-79ef-4135-abc3-e6c55058bc0e][python-IO]]
+[[id:d159e9cc-764a-4f1d-944b-03a3c884a6ea][python-oop]]

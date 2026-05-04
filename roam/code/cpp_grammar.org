@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       bf3979c4-92c5-40fe-831a-e83abc98d380
+:END:
+#+title: cpp-grammar
+#+startup: overview
+#+filetags: :cpp:
+
