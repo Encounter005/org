@@ -489,3 +489,55 @@ ONCLICK="window.history.back()"></FORM>
 | string.replace(str1, str2,  num=string.count(str1)) | 把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次                                                      |
 | string.split(str="", num=string.count(str))         | 以 str 为分隔符切片 string，如果 num 有指定值，则仅分隔 num+1 个子字符串                                                |
 | string.upper()                                      | 转换 string 中的小写字母为大写                                                                                          |
+* 队列
+python的队列是线程安全的，里面提供了Queue，LifoQueue，PriorityQueue模块
+** Queue
+#+begin_src python :results output
+from queue import Queue
+
+q = Queue()
+
+for i in range(1, 11):
+    q.put(i)
+
+while not q.empty():
+    print(q.get())
+#+end_src
+
+| 函数名                              | 描述                                                                                                                               |
+|-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------|
+| put(item, block=True, timeout=None) | 将 item 放入队列。如果 block 为 True 且队列已满，则等待 timeout 秒，直到队列有空闲空间。如果 timeout 为 None，则无限等待。         |
+| get(block=True, timeout=None)       | 从队列中获取并移除一个元素。如果 block 为 True 且队列为空，则等待 timeout 秒，直到队列中有元素。如果 timeout 为 None，则无限等待。 |
+| qsize()                             | 返回队列中的元素数量。                                                                                                             |
+| empty()                             | 如果队列为空，返回 True，否则返回 False。                                                                                          |
+| full()                              | 如果队列已满，返回 True，否则返回 False。                                                                                          |
+
+** LifoQueue
+栈
+#+begin_src python :results output
+from queue import LifoQueue
+
+q = LifoQueue()
+
+for i in range(1, 11):
+    q.put(i)
+
+while not q.empty():
+    print(q.get())
+#+end_src
+** PriorityQueue
+优先队列（小根堆）
+#+begin_src python :results output
+from queue import PriorityQueue
+import random
+
+q = PriorityQueue()
+for i in range(1, 11):
+    random_num = int(random.random() * 100)
+    print(f"random_num is: {random_num}")
+    q.put(random_num)
+
+while not q.empty():
+    print(q.get())
+#+end_src
+

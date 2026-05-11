@@ -3,5 +3,4 @@
 :END:
 #+title: cpp-grammar
 #+startup: overview
-#+filetags: :cpp:
-
+#+filetags: :cpp:grammar:

@@ -13,3 +13,5 @@
 [[id:b9b79e01-6ffc-465d-b9f1-bda9f06ac437][python-module]]
 [[id:67304125-79ef-4135-abc3-e6c55058bc0e][python-IO]]
 [[id:d159e9cc-764a-4f1d-944b-03a3c884a6ea][python-oop]]
+[[id:e15c5554-877e-4aea-8804-f3a7b43cc39b][python-exception]]
+[[id:7d192871-be03-434c-90d6-2cf66340dff1][python-concurrency]]

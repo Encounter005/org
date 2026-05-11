@@ -4,6 +4,6 @@
 #+title: Code
 #+filetags: :Code:
 
-[[id:1ee6b45f-50de-4e92-91a2-a6fc8856470b][python-grammar]]
-[[id:bf3979c4-92c5-40fe-831a-e83abc98d380][cpp-grammar]]
-[[id:a98e7cea-3283-4ef2-9537-93ec00cbea34][sql-grammar]]
+[[id:b65aab51-0230-4e2b-aff3-3b733071e736][cpp]]
+[[id:d547b2cf-c024-492b-a41a-6939de5bc3fc][python]]
+[[id:7c307356-7cfd-404e-9f97-9cf7a7ffea3a][sql]]
