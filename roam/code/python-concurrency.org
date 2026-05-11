@@ -1,0 +1,338 @@
+:PROPERTIES:
+:ID:       7d192871-be03-434c-90d6-2cf66340dff1
+:END:
+#+title: python-concurrency
+#+startup: overview
+#+filetags: :python:thread:aysnc:
+
+* 多线程
+** 创建线程
+#+begin_src 
+thread_obj = threading.Thread(target=函数名, args=(参数元组,))
+#+end_src
+*** 继承Thread类来创建任务
+#+begin_src python :results output
+import threading
+
+class MyThread(threading.Thread):
+    def run(self):
+        print("Thread beginning")
+        print("Doing something")
+        print("Thread ending")
+
+
+thread = MyThread()
+thread.start()
+thread.join()
+
+print("Main thread ending")
+#+end_src
+
+#+RESULTS:
+: Thread beginning
+: Doing something
+: Thread ending
+: Main thread ending
+
+*** 使用threading.thread构造函数来创建任务
+#+begin_src python :results output
+import threading
+
+def my_func(num: int, test_str: str):
+    print("Thread beginning")
+    print("Doing something")
+    print(f"num is {num}, test_str is {test_str}")
+    print("Thread ending")
+
+
+thread = threading.Thread(target=my_func, args=(10, "hello world"))
+thread.start()
+thread.join()
+print("Main Thread ending")
+#+end_src
+
+** 线程同步
+threading有互斥锁lock
+#+begin_src python :results output
+import threading
+
+lock = threading.Lock()
+def my_func():
+    with lock:
+        print("Thread beginning")
+        print("Doing something")
+        print("Thread ending")
+
+
+thread1 = threading.Thread(target=my_func)
+thread2 = threading.Thread(target=my_func)
+
+threads = [thread1, thread2]
+for thread in threads:
+    thread.start()
+    thread.join()
+print("Main Thread ending")
+#+end_src
+** 线程通信
+线程间通信可以通过队列（Queue）来实现。Queue 是线程安全的，可以在多个线程之间安全地传递数据。
+#+begin_src python :results output
+import threading
+import queue
+
+
+def worker(q: queue.Queue):
+    while not q.empty():
+        item = q.get()
+        print(f"handing task{item}")
+        q.task_done()
+
+
+q = queue.Queue()
+for i in range(10):
+    q.put(i)
+
+threads = []
+for i in range(3):
+    threads.append(threading.Thread(target=worker, args=(q,)))
+
+for i in threads:
+    i.start()
+    i.join()
+print("Main Thread ending")
+#+end_src
+
+** 常用api
+*** 核心类
+| 函数名                     | 描述                             |
+|----------------------------+----------------------------------|
+| threading.Thread           | 线程类，用于创建和管理线程       |
+| threading.Lock             | 互斥锁（原始锁）                 |
+| threading.RLock            | 可重入锁（同一线程可多次获取）   |
+| threading.Event            | 事件对象，用于线程同步           |
+| threading.Condition        | 条件变量，用于复杂线程协调       |
+| threading.Semaphore        | 信号量，控制并发线程数           |
+| threading.BoundedSemaphore | 有界信号量（防止计数超过初始值） |
+| threading.Timer            | 定时器线程，延迟执行             |
+| threading.local            | 线程局部数据（各线程独立存储）   |
+
+
+*** Lock/RLock
+| 函数名                             | 描述                   |
+|------------------------------------+------------------------|
+| acquire(blocking=True, timeout=-1) | 获取锁（阻塞或非阻塞） |
+| release()                          | 释放锁                 |
+| locked()                           | 检查锁是否被占用       |
+
+*** Event
+| 函数名             | 描述                           |
+|--------------------+--------------------------------|
+| set()              | 设置事件为真，唤醒所有等待线程 |
+| clear()            | 重置事件为假                   |
+| wait(timeout=None) | 阻塞直到事件为真或超时         |
+| is_set()           | 检查事件状态                   |
+
+*** Condition
+| 函数名             | 描述                           |
+|--------------------+--------------------------------|
+| wait(timeout=None) | 释放锁并阻塞，直到被通知或超时 |
+| notify(n=1)        | 唤醒最多 n 个等待线程          |
+| notify_all()       | 唤醒所有等待线程               |
+** 示例
+生产者-消费者模型
+#+begin_src python 
+from threading import Condition
+from threading import Thread
+from queue import Queue
+import random
+
+MAX_ITEMS = 10
+queue = []
+cond = Condition()
+
+
+def producer():
+    while True:
+        with cond:
+            while len(queue) >= MAX_ITEMS:
+                cond.wait()
+            item = random.randint(1, 100)
+            queue.append(item)
+            print(f"Produced {item}")
+            cond.notify_all()
+
+
+def consumer():
+    while True:
+        with cond:
+            while not queue:
+                cond.wait()
+            item = queue.pop()
+            print(f"Consumed {item}")
+            cond.notify_all()
+
+
+Producers = []
+Consumers = []
+
+for _ in range(5):
+    t = Thread(target=producer)
+    Producers.append(t)
+    t.start()
+
+
+for _ in range(3):
+    t = Thread(target=consumer)
+    Consumers.append(t)
+    t.start()
+
+for i in Consumers + Producers:
+    i.join()
+#+end_src
+* 异步任务
+[[https:hellowac.github.io/async-zh-cn/][asyncio教程]]
+** 协程
+协程是 asyncio 的核心概念之一。它是一个特殊的函数，可以在执行过程中暂停，并在稍后恢复执行。协程通过 async def 关键字定义，并通过 await 关键字暂停执行，等待异步操作完成。
+#+begin_src python 
+import asyncio
+
+
+async def say_hello():
+    print("hello")
+    await asyncio.sleep(1)
+    print("world")
+#+end_src
+
+** 事件循环
+事件循环是 asyncio 的核心组件，负责调度和执行协程。它不断地检查是否有任务需要执行，并在任务完成后调用相应的回调函数。
+#+begin_src python :results output
+import asyncio
+
+
+async def say_hello():
+    print("hello")
+    await asyncio.sleep(1)
+    print("world")
+
+
+async def main():
+    await say_hello()
+
+
+asyncio.run(main())
+#+end_src
+
+** 任务
+任务是对协程的封装，表示一个正在执行或将要执行的协程。你可以通过 asyncio.create_task() 函数创建任务，并将其添加到事件循环中。
+#+begin_src python
+async def main():
+    task = asyncio.create_task(say_hello())
+    await task
+#+end_src
+** Future
+Future 是一个表示异步操作结果的对象。它通常用于底层 API，表示一个尚未完成的操作。你可以通过 await 关键字等待 Future 完成。
+#+begin_src python
+async def main():
+    future = asyncio.Future()
+    await future
+#+end_src
+** 例子
+假设我们需要获取三个不同网址的内容。使用同步方式会顺序执行，总耗时是三次请求耗时的总和。使用 asyncio，我们可以让这三个请求同时发出，总耗时接近于最慢的那一次请求。
+*** 同步版
+#+begin_src python :results output
+import time
+import requests
+
+def fetch_url(url):
+    """模拟一个耗时的网络请求（同步版本）"""
+    print(f"开始获取: {url}")
+    time.sleep(2)  # 模拟 2 秒网络延迟
+    print(f"完成获取: {url}")
+    return f"来自 {url} 的数据"
+
+def main_sync():
+    urls = ['https://example.com/1', 'https://example.com/2', 'https://example.com/3']
+    results = []
+    start = time.time()
+    
+    for url in urls:
+        result = fetch_url(url)  # 必须等上一个完成才能开始下一个
+        results.append(result)
+    
+    end = time.time()
+    print(f"同步版本总耗时: {end - start:.2f} 秒")
+    print(f"结果: {results}")
+
+if __name__ == "__main__":
+    main_sync()
+#+end_src
+*** 异步版
+#+begin_src python :results output
+import asyncio
+import aiohttp
+import time
+
+async def fetch_url_async(session: aiohttp.ClientSession, url: str):
+    """模拟一个耗时的网络请求（异步版本）"""
+    print(f"开始异步获取: {url}")
+    # 注意：这里我们使用 aiohttp 的异步 get 方法，并用 await 等待
+    async with session.get(url) as response:
+        # 模拟处理响应也需要时间
+        await asyncio.sleep(2)  # 使用 asyncio.sleep 模拟 I/O 等待，它不会阻塞线程
+        text = await response.text()
+        print(f"完成异步获取: {url}")
+        return f"来自 {url} 的数据 (长度: {len(text)})"
+
+
+async def main_async():
+    urls = [
+        "https://httpbin.org/get",
+        "https://httpbin.org/delay/1",
+        "https://httpbin.org/headers",
+    ]
+
+    async with aiohttp.ClientSession() as session:  # 创建异步 HTTP 会话
+        # 为每个 URL 创建一个任务（Task）
+        tasks = []
+        for url in urls:
+            # create_task 会将协程加入事件循环，立即开始调度
+            task = asyncio.create_task(fetch_url_async(session, url))
+            tasks.append(task)
+
+        print("所有任务已创建，开始并发执行...")
+
+        # 使用 asyncio.gather 并发运行所有任务，并等待它们全部完成
+        # gather 返回一个结果列表，顺序与传入的任务顺序一致
+        results = await asyncio.gather(*tasks)
+
+        return results
+
+
+if __name__ == "__main__":
+    start = time.time()
+    # asyncio.run() 是启动事件循环并运行顶层协程的简便方法
+    final_results = asyncio.run(main_async())
+    end = time.time()
+
+    print(f"\n异步版本总耗时: {end - start:.2f} 秒")
+    for res in final_results:
+        print(res)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+所有任务已创建，开始并发执行...
+开始异步获取: https://httpbin.org/get
+开始异步获取: https://httpbin.org/delay/1
+开始异步获取: https://httpbin.org/headers
+完成异步获取: https://httpbin.org/get
+完成异步获取: https://httpbin.org/headers
+完成异步获取: https://httpbin.org/delay/1
+
+异步版本总耗时: 4.13 秒
+来自 https://httpbin.org/get 的数据 (长度: 312)
+来自 https://httpbin.org/delay/1 的数据 (长度: 362)
+来自 https://httpbin.org/headers 的数据 (长度: 229)
+#+end_example
+
+
+

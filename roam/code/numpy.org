@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       935e98f5-e7b8-4641-8af8-c6651b75ecbb
+:END:
+#+title: numpy
+#+startup: overview
+#+filetags: :python:numpy:
+
+
+[[https://numpy.org/doc/stable/user/index.html][UserGuide]]
+
+[[id:f5015c52-b735-4f08-ae31-3c9c71f948c6][numpy-core]]
+[[id:9d9f1f84-410e-4782-8008-fb6c613b0814][numpy-basic]]

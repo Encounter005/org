@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       4d747bb1-b122-4072-8dd1-b5ef2d447011
+:END:
+#+title: numpy-形状和转换
+#+startup: overview
+#+filetags: :python:numpy:形状和转换:
+
+* 形状和转换
+array 大多数情况下都是以多维的形式出现的，一般对超过二维的多维 array 称为「张量」，二维矩阵，一维向量。因为多维度，所以自然而然地涉及到形状的改变和转换，可以算是张量最基础的「操作」了。
+* 改变形状
+需要注意的是：无论是扩展还是缩减，多或少的 shape 都是 1， =squeeze= 时如果指定维度，则该维度 =shape= 必须是 1。
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(arr)
+
+# NOTE: 将矩阵打平
+print(f"打平后的矩阵是: {arr.ravel()}")
+print(f"矩阵的形状是: {arr.shape}")
+# NOTE: 矩阵扩展一个维度
+print(f"矩阵扩展一个维度: {np.expand_dims(arr, 1).shape}")
+# NOTE: 关于axis=(1, 3, 4)，原本的矩阵索引只有0，1，
+# 现在我们扩充了3个一维数组进去，总共是有5个索引，0~4，
+# 然后分别是在索引1，索引3，索引4的位置放入新加入的维度
+expanded = np.expand_dims(arr, axis=(1, 3, 4))
+print(expanded.shape)
+# FIXME: 扩充维度不能跳跃
+# NOTE: 不能跳跃的意思就是不能超出索引的范围
+# expanded = np.expand_dims(arr, axis=(1, 3, 8))
+# print(expanded.shape)
+
+# NOTE: np.squeeze是将长度为1的维度（冗余维度）删除，axis指定的索引维度必须为1
+squeezed = np.squeeze(expanded, axis=1)
+print(f"去除索引为1后的矩阵形状为: {squeezed.shape}")
+print(f"去除全部维度1的矩阵形状为: {np.squeeze(expanded).shape}")
+
+# NOTE: reshape 成另一个形状
+# NOTE: 元素数量必须和原来一致
+arr_reshaped = arr.reshape(2, 2, 3)
+print(f"shape: {arr}")
+print(f"reshaped: {arr_reshaped}")
+
+# 原地变换
+# NOTE: 必须和原来元素数量一致
+arr2 = np.copy(arr)
+print(f"shape: {arr2}")
+arr2.resize(4, 3)
+print(f"resized: {arr2}")
+
+# NOTE: 可以通过将refcheck设置成False，元素数量超出时截断，元素数量不够时，用0填充
+arr2.resize((2, 3), refcheck=False)
+print(f"arr resize to (2, 3): {arr2}")
+arr2.resize((3, 3), refcheck=False)
+print(f"arr resize to (3, 3): {arr2}")
+#+end_src
+* 反序
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(f"arr is: {arr}")
+
+# NOTE: 默认列反序
+print(f"列反序: {arr[::-1]}")
+# print(f"列反序: {arr[:, ::-1]}")
+print(f"行反序: {arr[::-1, :]}")
+print(f"行列反序: {arr[::-1, ::-1]}")
+
+
+#+end_src
+* 转置
+转置是线性代数的基本操作，拿二维矩阵为例，通俗理解就是把它放倒，shape 反转，行变成列，列成为行。当然，对于多维也是类似的。我们建议您二维矩阵用 =arr.T= （会快很多），超过二维的张量可以用 =np.transpose= ，会更加灵活些。
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(f"arr is: {arr}")
+
+print(f"arr的转置是: {arr.T}")
+
+arr = arr.reshape(1, 1, 3, 4)
+# NOTE: 将shape(1, 1, 3, 4)的转置后得到shape(4, 3, 1, 1)
+print(f"转置前的shape是: {arr.shape}, 转置后的shape是: {arr.T.shape}")
+arr = arr.reshape(3, 4)
+
+
+# NOTE: np.transpose可以指定axes
+# 不指定axes和T的效果一样
+print(f"arr的转置是: {np.transpose(arr)}")
+print(f"转置前的shape是: {arr.shape}, 转置后的shape是: {arr.T.shape}")
+
+'''
+NOTE: 指定axes，不过axes数量必须包含所有维度的序列
+比如两个维度(0, 1)，四个就是(0, 1, 2, 3)
+当然顺序也可以变，比如下面就是只转置第2个和第3个维度
+注意，只有超过2维时这样才有意义
+下面的例子中，中间2个维度就被调换顺序了，顺序在axes中指定
+'''
+print(f"使用np.transpose")
+arr = arr.reshape(1, 1, 3, 4)
+print(f"转置前的shape是: {arr.shape}, 转置后的shape是: {np.transpose(arr, axes=(0, 2, 1, 3)).shape}")
+#+end_src

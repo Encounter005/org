@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       d547b2cf-c024-492b-a41a-6939de5bc3fc
+:END:
+#+title: python
+#+startup: overview
+#+filetags: :python:
+
+[[id:935e98f5-e7b8-4641-8af8-c6651b75ecbb][numpy]]
+[[id:1ee6b45f-50de-4e92-91a2-a6fc8856470b][python-grammar]]

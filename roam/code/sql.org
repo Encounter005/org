@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       7c307356-7cfd-404e-9f97-9cf7a7ffea3a
+:END:
+#+title: sql
+#+startup: overview
+#+filetags: :SQL:
+
+[[id:a98e7cea-3283-4ef2-9537-93ec00cbea34][sql-grammar]]

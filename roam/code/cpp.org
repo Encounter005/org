@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       b65aab51-0230-4e2b-aff3-3b733071e736
+:END:
+#+title: cpp
+#+startup: overview
+#+filetags: :cpp:
+
+[[id:bf3979c4-92c5-40fe-831a-e83abc98d380][cpp-grammar]]

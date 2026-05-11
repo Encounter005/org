@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       9d9f1f84-410e-4782-8008-fb6c613b0814
+:END:
+#+title: numpy-basic
+#+startup: overview
+#+filetags: :python:numpy:basic:
+
+[[id:d13139be-1d8e-432e-9f36-68530da3a7cc][numpy-创建和生成]]
+[[id:4d747bb1-b122-4072-8dd1-b5ef2d447011][numpy-形状和转换]]
+[[id:635ec3e2-f275-45ec-b7fa-507e72855cce][numpy-统计和属性]]
+[[id:a32722fe-a12a-419e-9dad-c2cf2b74cce7][numpy-分解和组合]]
