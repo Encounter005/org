@@ -17,3 +17,4 @@ jobs:
           org-roam-db-filename: ./roam/org-roam.db
           org-roam-directory: ./roam
           site-title: Encounter005's org-roam
+          deploy-to-pages: true
