@@ -1,0 +1,85 @@
+:PROPERTIES:
+:ID:       5026f021-f354-4c4f-a418-7a300b5550c6
+:END:
+#+title: numpy-矩阵运算
+#+startup: overview
+#+filetags: :python:numpy:矩阵运算:
+* 算术
+所有的算术函数都可直接用于array
++ 注意：mod运算可以指定多个被除数
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 20, (3, 4))
+print(f"arr is:\n{arr}")
+
+print(f"arr * 2 is:\n{arr * 2}")
+print(f"arr ** 2 is:\n{arr ** 2}")
+print(f"sqrt(arr) is:\n{np.sqrt(arr)}")
+print(f"log(arr) is:\n{np.log(arr)}")
+# NOTE: 超过5都换成5
+print(f"np.minimum(arr, 5) is:\n{np.minimum(arr, 5)}")
+# NOTE: 小于5都换成5
+print(f"np.maximum(arr, 5) is:\n{np.maximum(arr, 5)}")
+# NOTE: 四舍五入
+print(f"np.round(np.sqrt(arr), 2) is:\n{np.round(np.sqrt(arr), 2)}")
+print(f"np.ceil(np.sqrt(arr)) is:\n{np.ceil(np.sqrt(arr))}")
+# NOTE: mod <=> x % 3
+print(f"np.mod(arr, 3) is:\n{np.mod(arr, 3)}")
+print(f"arr - 5 is:\n{arr - 5}")
+#+end_src
+* 广播
+用于处理不同形状array的方法，较小的数组会在较大的数组上进行广播，以便适配对方的形状
++ 注意：广播需要满足对应的形状
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(f"arr is:\n{arr}")
+
+# NOTE: 广播，后面的被当作1行4列
+print(f"arr + [1, 2, 3, 4] is:\n{arr + [1, 2, 3, 4]}")
+# NOTE: 后面的被当作3行1列
+print(f"arr + [[1], [2], [3]] is:\n{arr + [[1], [2], [3]]}")
+print(np.mod(arr, [1, 2, 3, 4]))
+
+#+end_src
+* 矩阵相关
++ 注意： =dot= 和 =matul= 在高维度时表现不同
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+a = rng.integers(1, 10, (3, 2))
+b = rng.integers(1, 10, (2, 4))
+c = rng.integers(1, 10, (3, 3))
+print(f"a is:\n{a}\nb is:\n{b}\nc is:\n{c}")
+
+print(f"array乘法 np.dot(a, b) or a.dot(b):\n {np.dot(a, b)}")
+
+# NOTE: 高维度下dot和matmul的区别
+# ijk, lkm -> ijlm
+print(f"dot维度区别:{ np.dot(np.ones((5, 2 , 3)), np.ones((4 ,3 , 6))).shape }")
+# ijk, ikl -> ijl
+print(f"matmul维度区别:{np.matmul(np.ones((4, 2, 3)), np.ones((4, 3, 6))).shape}")
+
+# NOTE: 矩阵乘法
+# NOTE: 与dot的区别是matmul矩阵堆叠在一起广播
+# 也可以写成a @ b
+print(f"矩阵乘法 a * b is:\n{np.matmul(a, b)}")
+
+# NOTE: 点积
+print(f"np.vdot(a, a) is:\n{np.vdot(a, a)}")
+
+# NOTE: 内积
+print(f"np.inner(a, a) is:\n{np.inner(a, a)}")
+
+# NOTE: 行列式
+print(f"c的行列式是:\n{np.linalg.det(c)}")
+
+# NOTE: 逆矩阵（方阵）
+print(f"c的逆矩阵是:\n{np.linalg.inv(c)}")
+
+#+end_src

@@ -9,3 +9,5 @@
 [[id:4d747bb1-b122-4072-8dd1-b5ef2d447011][numpy-形状和转换]]
 [[id:635ec3e2-f275-45ec-b7fa-507e72855cce][numpy-统计和属性]]
 [[id:a32722fe-a12a-419e-9dad-c2cf2b74cce7][numpy-分解和组合]]
+[[id:1501dc74-b11e-49cb-b3f4-73619cb1f335][numpy-筛选和过滤]]
+[[id:5026f021-f354-4c4f-a418-7a300b5550c6][numpy-矩阵运算]]

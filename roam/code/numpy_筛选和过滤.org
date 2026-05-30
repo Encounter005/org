@@ -1,0 +1,76 @@
+:PROPERTIES:
+:ID:       1501dc74-b11e-49cb-b3f4-73619cb1f335
+:END:
+#+title: numpy-筛选和过滤
+#+startup: overview
+#+filetags: :python:numpy:筛选和过滤:
+
+* 条件筛选
+根据一定条件堆array进行筛选或标记，核心api是 =np.where=
++ 注意：where分别返回个维度的index，赋值是“不满足”条件的
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(f"arr is:\n{arr}")
+
+# NOTE: condition filter
+print(f"arr > 50 is:\n{arr > 50}")
+# NOTE: 返回满足条件的索引，因为是两个维度，所以会返回两组结果
+print(f"np.where(arr > 50) is:\n{np.where(arr > 50)}")
+# NOTE: 不满足条件的赋值，将<=50的替换为-1
+print(f"np.where(arr > 50, arr, -1) is:\n{np.where(arr > 50, arr, -1)}")
+#+end_src
+
+* 提取
+在array中提取特定条件的值
++ 注意：提取和唯一值返回的都是一维向量
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.integers(1, 100, (3, 4))
+print(f"arr is:\n{arr}")
+
+# NOTE: 提取特定条件的值
+print(f"extract the element > 50: {np.extract(arr > 50, arr)}")
+# NOTE: 提取唯一值
+print(f"get the unique value: {np.unique(arr)}")
+#+end_src
+
+* 抽样
+做机器学习的时候，往往需要通过部分数据来验证整体过程，可以通过随机取样来获得部分数据
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+"""
+rng.choice(
+a: 要抽象的集合，可以是整数（0到该值），可以是数组
+size: 样本大小
+replace(bool): 结果是否可以重复
+p:出现的概率，长度与a的长度保持一致
+)
+"""
+print(rng.choice(4, 2, replace=False, p=[0.1, 0.2, 0.3, 0.4]) )
+
+
+#+end_src
+* 最值index
+#+begin_src python :results output
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+arr = rng.uniform(1, 100, (3, 4))
+print(f"arr is:\n{arr}")
+
+# NOTE: 按列(axis=0)最大值的index
+print(f"the index of the max value in col is: {np.argmax(arr, axis=0)}")
+# NOTE: 按行(axis=1)最小值的index
+print(f"the index of the min value in row is: {np.argmin(arr, axis=1)}")
+
+# NOTE: 数据默认按行(axis=1)排序的索引
+print(f"sort by row is:\n{np.argsort(arr, axis=1)}")
+print(f"sort by col is:\n{np.argsort(arr, axis=0)}")
+#+end_src
