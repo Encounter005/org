@@ -8,3 +8,4 @@
 [[id:f5c7c1bd-4881-4053-8398-30a57044a7dd][operating system]]
 [[id:ee08f92f-82ba-4e22-9cc2-17443ffa1bf4][Network]]
 [[id:ffc8d768-8520-4b0e-bf26-6eee2852dfc2][English]]
+[[id:044863d9-9226-4415-91b4-d3555747d232][AI]]
