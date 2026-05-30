@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       044863d9-9226-4415-91b4-d3555747d232
+:END:
+#+title: AI
+#+startup: overview
+#+filetags: :AI:
+
+[[id:b4cafc41-8507-49d4-b2c9-7720efdb7baf][机器学习]]
+[[id:ea738c87-7c82-4d3e-ab8c-0d751f59a781][机器学习模型]]

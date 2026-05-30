@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ea738c87-7c82-4d3e-ab8c-0d751f59a781
+:END:
+#+title: 机器学习模型
+#+startup: overview
+#+filetags: :MachineLearning:Model:
+
+[[https://developers.google.com/machine-learning/crash-course/linear-regression?hl=zh-cn][tutorial]]
+
+[[id:273e1260-2752-4c7f-864e-81d7e308aa00][线性回归]]
+[[id:ea6d61b6-a2c8-4c40-8ef4-4cd44c32f3ea][逻辑回归]]
+[[id:c7c7ccae-b4d0-4cb8-aee2-3aae2490c729][分类]]
