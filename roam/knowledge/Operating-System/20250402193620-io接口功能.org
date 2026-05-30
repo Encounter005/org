@@ -24,7 +24,7 @@
 
 主机->IO接口->外部设备
 
-#+begin_src mermaid :file ./pic/IO-PORT.png
+#+begin_src mermaid :file ./img/IO-PORT.png
 mindmap
   root((IO接口类型))
     按数据传输方式

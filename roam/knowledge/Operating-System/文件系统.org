@@ -6,7 +6,7 @@
 #+STARTUP: overview
 
 * 全局结构
-[[file:pic/文件系统全局结构.png]]
+[[file:img/文件系统全局结构.png]]
 
 * 在外存中的结构
 

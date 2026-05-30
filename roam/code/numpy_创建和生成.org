@@ -97,7 +97,7 @@ plt.show()
 :  [5.4 7.2 9. ]]
 : [[1.00000000e+00 6.04964746e+00 3.65982344e+01]
 :  [2.21406416e+02 1.33943076e+03 8.10308393e+03]]
-[[file:pic/Screenshot from 2026-05-06 10-55-05.png]]
+[[file:img/Screenshot from 2026-05-06 10-55-05.png]]
 
 * array条件判断
 #+begin_src python :results output

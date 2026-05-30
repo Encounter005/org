@@ -18,7 +18,7 @@ $$ f(x) = \frac{1}{1 + e^{-x}}  $$
 - f(x)是函数的输出
 - e是欧拉数：约为2.71828
 - x是函数的输入
-[[file:pic/sigmoid_function_with_axes.png]]
+[[file:img/sigmoid_function_with_axes.png]]
 
 由上图可知，随着x的增加，s函数的输出会接近1，但永远不会达到1。同样，随着x的减小，s函数的输出会接近0，但永远不会达到0
 * 使用S函数转换线性输出
@@ -33,7 +33,7 @@ $$ z = b + w_1x_1 + w_2x_2 + ... + w_Nx_N$$
 $$y^{'} = \frac{1}{1 + e^{-z}}$$
 
 #+ATTR_ORG: :width 1000
-[[file:pic/linear_to_logistic.png]]
+[[file:img/linear_to_logistic.png]]
 
 在图中，线性方程称为S型函数的输入，该函数将直线弯曲成S形。
 #+begin_notes

@@ -4,8 +4,7 @@
 #+title: 固态硬盘SSD
 #+STARTUP:overview
 
-[[file:/home/encounter/org/roam/Operating-System/pic/SSD.png]]
-
+[[file:img/SSD.png]]
 * 原理
 
 基于闪存技术，属于电可擦除ROM，EEPROM

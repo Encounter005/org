@@ -4,7 +4,7 @@
 #+title: IO设备分类
 #+STARTUP: overview
 
-#+begin_src mermaid :file ./pic/IO_DEVICE_SORT.png
+#+begin_src mermaid :file ./img/IO_DEVICE_SORT.png
 mindmap
   root((IO设备分类))
     按使用特性

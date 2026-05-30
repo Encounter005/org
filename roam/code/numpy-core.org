@@ -62,4 +62,4 @@ False
 - 如果是结构化数据类型，则是其他数据类型的集合
 - 如果数据类型是子数组，它的形状和数据类型
 ** 类型
-[[file:pic/dtype-hierarchy.png]]
+[[file:img/dtype-hierarchy.png]]

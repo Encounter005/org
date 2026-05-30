@@ -39,20 +39,20 @@
 1. 该模型接受单个标记示例，并提供预测结果
    
   #+ATTR_ORG: :width 500
-  [[file:pic/training-a-model-01.png]] 
+  [[file:img/training-a-model-01.png]] 
 
 2. 模型会将器预测值与实际值进行比较，并更新其解决方案
    
   #+ATTR_ORG: :width 500
-  [[file:pic/training-a-model-02.png]] 
+  [[file:img/training-a-model-02.png]] 
 
 3. 模型会对数据集中的每个标记示例重复此过程。
-  [[file:pic/training-a-model-03.png]] 
+  [[file:img/training-a-model-03.png]] 
 
 在训练期间，机器学习从业者可以对模型用于进行预测的配置和特征进行微妙调整。例如，某些特征的预测能力比其他特征更强。因此，机器学习从业者可以选择模型在训练期间使用哪些特征。例如，假设某个天气数据集包含 time_of_day 作为地图项。在这种情况下，机器学习从业者可以在训练期间添加或移除 time_of_day，以了解模型在添加或移除 time_of_day 后能否做出更准确的预测。
 ** 正在评估
 我们会评估训练好的模型，以确定其学习效果。评估模型时，我们使用标记数据集，但只向模型提供数据集的特征。然后，我们将模型的预测结果与标签的真实值进行比较。
 #+ATTR_ORG: :width 450
-[[file:pic/evaluating-a-model.png]] 
+[[file:img/evaluating-a-model.png]] 
 ** 推理
 对模型评估结果感到满意后，我们就可以使用该模型对无标签示例进行预测（称为推理）。在天气应用示例中，我们会向模型提供当前天气状况（例如温度、大气压和相对湿度），然后模型会预测降雨量。
