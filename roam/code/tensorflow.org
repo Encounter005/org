@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       47ff6643-5ed7-4fb9-bd5f-cba4e26d96fd
+:END:
+#+title: tensorflow
+#+startup: overview
+#+filetags: :python:AI:MachineLearning:
+
+* [[id:0f06676d-bbff-43b5-b15f-9b89d3afc9e5][张量]]

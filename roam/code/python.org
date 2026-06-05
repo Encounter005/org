@@ -5,5 +5,6 @@
 #+startup: overview
 #+filetags: :python:
 
-[[id:935e98f5-e7b8-4641-8af8-c6651b75ecbb][numpy]]
-[[id:1ee6b45f-50de-4e92-91a2-a6fc8856470b][python-grammar]]
+* [[id:935e98f5-e7b8-4641-8af8-c6651b75ecbb][numpy]]
+* [[id:1ee6b45f-50de-4e92-91a2-a6fc8856470b][python-grammar]]
+* [[id:47ff6643-5ed7-4fb9-bd5f-cba4e26d96fd][tensorflow]]
