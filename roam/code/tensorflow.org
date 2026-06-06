@@ -1,8 +1,11 @@
 :PROPERTIES:
 :ID:       47ff6643-5ed7-4fb9-bd5f-cba4e26d96fd
 :END:
-#+title: tensorflow
+#+title: TensorFlow
 #+startup: overview
 #+filetags: :python:AI:MachineLearning:
 
 * [[id:0f06676d-bbff-43b5-b15f-9b89d3afc9e5][张量]]
+* [[id:43ca570a-b773-4f36-b5ca-d62934a0949f][变量]]
+* [[id:e07baf6e-caf9-4d60-878c-3ec4b881d0ee][立即执行模式]]
+* [[id:9c563f9a-59c7-4d25-9bf3-14f6afd3a3e4][计算图和tf.function]]

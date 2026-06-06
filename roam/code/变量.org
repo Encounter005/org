@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       43ca570a-b773-4f36-b5ca-d62934a0949f
+:END:
+#+title: 变量
+#+startup: overview
+#+filetags: :tensorflow:变量:
+
+=variable= 与 =tensor= 的差别在于 =variable= 类型的变量在训练的时候是可以改变的， =tensor= 不行
+
+* 定义
+[[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
+#+begin_src python
+import tensorflow as tf
+
+# definition
+var1 = tf.Variable(3.0)
+var2 = tf.Variable([[1.0, 2.0], [3.0, 4.0]])
+
+print(f"var1 is: {var1}")
+print(f"var2 is: \n{var2}")
+print(50 * "#")
+#+end_src
+
+* 操作
+[[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
+#+begin_src python
+import tensorflow as tf
+# operation 支持四则运算
+x = tf.Variable(5)
+y = tf.Variable(6)
+
+x.assign(x + 1)
+y.assign(y - 1)
+
+print(x)
+print(x.value())
+print(x.value().numpy())
+print(y.value().numpy())
+#+end_src
+
+* 更新变量
+- assign(): 将变量的值更新为指定值
+- assign_add(): 将指定的值加到变量上
+- assign_sub(): 将指定的值减到变量上
+
+[[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
+#+begin_src python
+import tensorflow as tf
+v = tf.Variable([1.0, 2.0, 3.0])
+
+v.assign([4.0, 5.0, 6.0])
+print(v)
+v.assign_add([1.0, 1.0, 1.0])
+print(v)
+v.assign_sub([2.0, 2.0, 2.0])
+print(v)
+#+end_src
