@@ -1,0 +1,223 @@
+:PROPERTIES:
+:ID:       4b609503-1a18-491b-a859-a59af189616a
+:END:
+#+title: shared_ptr
+#+startup: overview
+#+filetags: :SmartPointer:shared_ptr:
+
+* shared_ptr
+:PROPERTIES:
+:CUSTOM_ID: shared_ptr
+:END:
+** 工作原理
+:PROPERTIES:
+:CUSTOM_ID: 工作原理
+:END:
+1. 我们在动态内存分配时，堆上的内存必须通过栈上的内存来寻址，也就是说栈上的指针(堆上的指针也可以指向堆内存，但终究是要通过栈来寻址)是寻找堆内存的唯一方式
+
+2. 所以我们可以给堆内存添加一个引用计数，有几个指针指向它，它的引用计数就是几。当引用计数为 0 时，操作系统就会释放掉这块内存
+
+** 常用操作
+:PROPERTIES:
+:CUSTOM_ID: 常用操作
+:END:
+*** 1. 初始化
+:PROPERTIES:
+:CUSTOM_ID: 初始化
+:END:
+使用=new=运算符初始化
+
+#+begin_quote
+一般来说不推荐使用=new=进行初始化，因为 C++标准提供了专门创建=shared_ptr=的函数=make_shared()=，该函数是经过优化的，效率更高
+#+end_quote
+
+使用=make_shared()=初始化
+
+=注意= ： 千万不要用裸指针初始化=shared_ptr=，容易出现内存泄露的问题
+
+使用复制构造函数初始化也行
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+  std::shared_ptr<int> shared1(new int (100));
+  std::shared_ptr<int> shared2 = std::make_shared<int>(100);
+  std::shared_ptr<int> shared3(shared2);// 使用复制构造函数初始化也行
+  int *pi = new int(100);
+
+  std::shared_ptr<int> shared4(pi);
+  // delete pi; // NOTE: 会造成二次释放(堆内存的重复释放)
+
+  return 0;
+}
+#+end_src
+
+*** 2. shared_ptr 的引用计数
+:PROPERTIES:
+:CUSTOM_ID: shared_ptr-的引用计数
+:END:
+智能指针就是通过引用计数来判断释放内存的时机的\\
+=use_count()=函数可以得到=shared_ptr=对象的引用计数
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::cout << shared1.use_count() << std::endl;
+
+  std::shared_ptr<int> shared2(shared1);
+  std::cout << shared1.use_count() << std::endl;
+
+  shared2.reset(); // NOTE: 释放掉该指针对对象的控制权
+  std::cout << shared1.use_count() << std::endl;
+
+  return 0;
+}
+#+end_src
+
+*** 3. 把 shared_ptr 当成普通指针使用
+:PROPERTIES:
+:CUSTOM_ID: 把-shared_ptr-当成普通指针使用
+:END:
+智能指针可以像普通指针那样使用，=shared_ptr=早已对各种操作进行了重载，就当它是普通指针就可以了
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::cout << *shared1 << std::endl;
+
+  return 0;
+}
+#+end_src
+
+*** 4. 常用函数
+:PROPERTIES:
+:CUSTOM_ID: 常用函数
+:END:
+1. =unique=函数
+   > 判断该=shared_ptr=对象是否独占，若独占，返回=true=，否则返回=false=
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::cout << shared1.unique() << std::endl;
+
+  std::shared_ptr<int> shared2(shared1);
+  std::cout << shared1.unique() << std::endl;
+
+
+  shared2.reset();
+  std::cout << shared1.unique() << std::endl;
+
+  return 0;
+}
+#+end_src
+
+2. [@2] =reset=函数
+
+   1. 当=reset=函数有参数时，改变此=shared_ptr=对象指向的内存
+   2. 当=reset=函数无参数时，将此=shared_ptr=对象置空，也就是将对象内存的指针设置为=nullptr=
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::cout << shared1.unique() << std::endl;
+
+  std::shared_ptr<int> shared2 = std::make_shared<int>(100);
+
+  shared1.reset(new int(100));
+
+  shared2 = shared1;
+  shared1.reset();
+  return 0;
+}
+#+end_src
+
+3. [@3] =get=函数， 强烈不推荐使用
+
+如果一定要用，那么一定不能=delete=返回的指针
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::cout << shared1.unique() << std::endl;
+
+  delete shared1.get(); // NOTE: 堆内存重复释放
+
+  return 0;
+}
+#+end_src
+
+4. [@4] =swap=函数
+
+   #+begin_quote
+   交换两个智能指针所指向的内存
+   #+end_quote
+
+5. =std=命名空间中全局的=swap=函数
+
+6. =shared_ptr=类提供的=swap=函数
+
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+  std::shared_ptr<int> shared1 = std::make_shared<int>(100);
+  std::shared_ptr<int> shared2 = std::make_shared<int>(1000);
+
+  shared1.swap(shared2);
+  std::cout << *shared1 << std::endl;
+  std::cout << *shared2 << std::endl;
+
+  std::swap(shared1, shared2);
+  std::cout << *shared1 << std::endl;
+  std::cout << *shared2 << std::endl;
+
+  return 0;
+}
+#+end_src
+
+*** 5. 关于智能指针创建数组的问题
+:PROPERTIES:
+:CUSTOM_ID: 关于智能指针创建数组的问题
+:END:
+*** 6. 用智能指针作为参数传递时直接值传递就行
+:PROPERTIES:
+:CUSTOM_ID: 用智能指针作为参数传递时直接值传递就行
+:END:
+=shared_ptr=的大小为固定的=8=或=16=字节
+
+#+begin_quote
+也就是两倍指针的大小，32 位系统指针为=4=个字节，64 位系统指针为=8=个字节，=shared_ptr=中就两个指针，所以直接按值传递就行了
+#+end_quote
+
+*** 7. 总结
+:PROPERTIES:
+:CUSTOM_ID: 总结
+:END:
+在现代程序中，当想要共享一块堆内存时，优先使用=shared_ptr=，可以极大的减少内存泄露的问题
+

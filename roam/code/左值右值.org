@@ -1,0 +1,158 @@
+:PROPERTIES:
+:ID:       5b9758c5-a3da-4f33-9021-1165793915e3
+:END:
+#+title: 左值右值及引用
+#+startup: overview
+#+filetags: :cpp:lvalue:rvalue:reference:
+
+* 左值、右值
+:PROPERTIES:
+:CUSTOM_ID: 左值-右值
+:END:
+C++任何一个对象要么是左值要么是右值
+
+例如 =int i = 10= , i和10都是对象
+
+左值：拥有地址属性的对象就叫左值，左值来源于 C 语言的说法，能放在”=“左边的就是左值
+
+#+begin_quote
+左值也可以放在”=“右边
+#+end_quote
+
+右值：不是左值的对象就是右值。或者说无法操作地址的对象就叫做右值。一般来收，判断一个对象是否为右值，就看它是不是左值，有没有地址属性，不是左值，那就是右值
+
+比如临时对象，就都是右值，临时对象的地址属性无法使用
+
+注意：左值也可以放在”\=“右边，但右值绝对不可以放在”=“左边
+
+#+begin_src c++
+#include <iostream>
+
+int main() {
+
+  int i = 10;
+  int i2 = (i + 1);// i + 1 是一个临时对象
+  ++i = 200;//++i 是先给i加1，然后返回i
+ // i++ = 200;//先返回一个临时变量，这个临时变量的值等于i的值，而临时变量没有地址属性
+
+  return 0;
+}
+#+end_src
+
+* 引用的分类
+:PROPERTIES:
+:CUSTOM_ID: 引用的分类
+:END:
+1. 普通左值引用：就是一个对象的别名，只能绑定左值，无法绑定常量对象
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+
+int main() {
+
+  int i = 10;
+  int& re = i;
+
+  std::cout << re << std::endl;
+  return 0;
+}
+#+end_src
+
+1. const 左值引用：可以对常量起别名，可以绑定左值和右值
+
+#+begin_quote
+C++规定const T&这种方式的左值引用可以接受右值(即亡值、纯右值)
+#+end_quote
+
+#+begin_src c++
+#include <iostream>
+
+int main() {
+
+  const int i = 10;
+  const int& re = (i + 1);
+
+  std::cout << re << std::endl;
+  return 0;
+}
+#+end_src
+
+1. 右值引用：只能绑定右值的引用
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+int main() {
+
+  int i = 10;
+  int&& rrefi = 200;
+  int&& r1 = i ++;
+  std::cout << r1 << std::endl;
+  return 0;
+}
+#+end_src
+
+* move函数、临时对象
+:PROPERTIES:
+:CUSTOM_ID: move函数-临时对象
+:END:
+** move函数
+:PROPERTIES:
+:CUSTOM_ID: move函数
+:END:
+1. 右值看重对象的值而不考虑其地址属性，move 函数可以对一个左值使用，是操作系统不再在意其地址属性，将其完全视作为一个右值
+
+2. move 函数让操作的对象失去了地址属性，所以我们有义务保证以后不再使用该变量的地址属性，简单来说就是不再使用该变量，因为左值对象的地址是其使用时无法绕过的属性
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+int main()
+{
+  int i = 10;
+  // FIX: int&& rrefi = i; i是一个左值
+  int&& rrefI = std::move(i);
+  // NOTE: i依旧是一个左值，move(i)是将i的地址属性忽略掉，是一个右值
+  return 0;
+}
+#+end_src
+
+** 临时对象
+:PROPERTIES:
+:CUSTOM_ID: 临时对象
+:END:
+1. 右值都是不体现地址的对象，那么，还有什么能比临时对象更加没有地址属性呢？右值引用主要负责处理的就是临时对象
+
+2. 程序执行时生成的中间对象就是临时对象，注意所有的临时对象都是右值对象，因为临时对象昌盛后很快就可能被销毁，使用的是它的值属性
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+
+int getI()
+{
+  return 10;// NOTE:该函数返回的值就是临时对象
+}
+
+
+int main()
+{
+  int i = 10;
+  int&& rrefI = getI();
+  return 0;
+}
+#+end_src
+

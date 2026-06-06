@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       a40d0ca1-2dff-410b-bc2f-03c0c2b30f99
+:END:
+#+title: cpp-oop
+#+startup: overview
+#+filetags: :cpp:oop:
+
+* [[id:3f01647d-13e7-4bbc-ba63-b529a8bd023e][cpp-class]]
+* [[id:ea0d97e0-075c-4ecc-b6ca-8224bb67ee82][cpp-inheritance]]
+* [[id:52046f53-4394-4d86-bf0a-7f36c0ba5244][cpp-friend]]
+* [[id:fb76bc38-792f-4090-8836-dc0af1cabe07][cpp-override-operator]]
+
