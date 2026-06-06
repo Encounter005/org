@@ -1,0 +1,630 @@
+:PROPERTIES:
+:ID:       b270628e-b5d7-4d16-b378-e6ac6ee682f4
+:END:
+#+title: cpp-template
+#+startup: overview
+#+filetags: :cpp:template:
+
+#+begin_quote
+C++的三大模块，面向过程、面向对象、模板与泛型。面向过程就是 C 语言，面向对象就是类，现在轮到模板与泛型了
+#+end_quote
+
+* 介绍及实现原理
+:PROPERTIES:
+:CUSTOM_ID: 介绍及实现原理
+:END:
+- 模板能够实现一些其他语法难以实现的功能，但是理解起来会更加困难，容易导致新手摸不着头脑
+
+- 模板分为类模板和函数模板，函数模板又分为普通函数模板和成员函数模板
+
+- 模板需要编译两次，在第一次编译时仅仅检查最基本的语法，比如括号是否匹配。等函数真正被调用的时候，才会真正生成需要的类或函数，所以这导致了一个结果，就是不论是模板类还是模板函数，声明与实现都必须放在同一个文件中，因为程序在编译期就必须知道函数具体的实现过程，如果实现和声明分文件编写，需要在链接时才可以看到函数的具体实现过程，这当然会报错，于是人们发明了 =.hpp= 文件来存放模本这种声明与实现在同一文件的情况
+
+
+#+begin_src c++
+// filename: MyClass.cpp
+#pragma once
+#include <cstddef>
+template <typename T> class MyArray {
+  using iterator = T *;
+  using const_iterator = const T *;
+
+private:
+  T *data;
+
+public:
+  // NOTE: size_t在32位系统上定义为 unsigned
+  // int，也就是32位无符号整型。在64位系统上定义为 unsigned long ,
+  // 也就是64位无符号整形。
+
+  MyArray(size_t count);
+
+  iterator begin() const;
+
+  const_iterator cbegin() const;
+
+  ~MyArray();
+};
+
+template <typename T> MyArray<T>::MyArray(size_t count) {
+  if (count) {
+    data = new T[count]();
+  } else
+    data = nullptr;
+}
+
+template <typename T> MyArray<T>::~MyArray() {
+  if (data)
+    delete[] data;
+}
+
+// NOTE: 定义迭代器得使用typename
+template <typename T> typename MyArray<T>::iterator MyArray<T>::begin() const {
+  return data;
+}
+
+template <typename T>
+typename MyArray<T>::const_iterator MyArray<T>::cbegin() const {
+  return data;
+}
+#+end_src
+
+#+begin_src c++
+#include <iostream>
+#include <string>
+#include <memory>
+#include "MyClass.hpp"
+
+int main() {
+
+  MyArray<int> st(100);
+  std::cout << *st.begin() << std::endl;
+  return 0;
+}
+#+end_src
+
+* initializer_list
+:PROPERTIES:
+:CUSTOM_ID: initializer-list
+:END:
+
+#+begin_quote
+initializer_list 其实就是初始化列表，我们可以用初始化列表初始化各种容器，比如vector、array
+#+end_quote
+
+#+begin_src c++
+#ifndef MYCLASS_H_
+#define MYCLASS_H_
+
+#include <cstddef>
+#include <initializer_list>
+#include <type_traits>
+// NOTE:类型萃取
+#include <vector>
+
+// NOTE: 模板特化
+
+template <typename T> struct get_type {
+    using type = T;
+};
+
+template <typename T> struct get_type<T *> {
+    using type = T;
+};
+
+template <typename T> class MyArray {
+private:
+    T *data{ nullptr };
+    // NOTE:
+    // 在创建的时候实际上是创建了两层指针，第一层是data，第二层是data里面的元素
+    // 析构函数只删除了第一层指针，导致第二层还留着，造成内存泄露
+    // 得使用智能指针来避免的这个问题
+    // 如果是容器的话，直接用vector就好了
+    //
+    using iterator       = T *;
+    using const_iterator = const T *;
+    unsigned int cnt{ 0 };
+
+public:
+    MyArray( const MyArray & )            = delete;
+    MyArray &operator=( const MyArray & ) = delete;
+    MyArray( MyArray && )                 = delete;
+    MyArray &operator=( MyArray && )      = delete;
+    MyArray( std::size_t count );
+    MyArray( const std::initializer_list<T> &list );
+    MyArray( std::initializer_list<T> &&list );
+    iterator begin() const;
+    const_iterator cbegin() const;
+
+    T &operator[]( unsigned int query ) const { return data[query]; }
+
+    ~MyArray();
+};
+
+template <typename T> MyArray<T>::MyArray( std::size_t count ) : cnt( count ) {
+    if ( count > 0 ) {
+        data = new T[count]();
+    }
+}
+
+template <typename T> typename MyArray<T>::iterator MyArray<T>::begin() const {
+    return data;
+}
+
+template <typename T>
+typename MyArray<T>::const_iterator MyArray<T>::cbegin() const {
+    return data;
+}
+
+template <typename T>
+MyArray<T>::MyArray( const std::initializer_list<T> &list ) {
+    if ( list.size() ) {
+        data = new T[list.size()]();
+        if constexpr ( std::is_pointer<T>::value ) {
+            for ( auto elem : list )
+                data[cnt++] = new typename get_type<T>::type( *elem );
+
+        } else {
+            for ( const auto &elem : list )
+                data[cnt++] = elem;
+        }
+
+    } else
+        data = nullptr;
+}
+
+template <typename T> MyArray<T>::MyArray( std::initializer_list<T> &&list ) {
+    if ( list.size() ) {
+        data = new T[list.size()]();
+
+        for ( auto &elem : list )
+            data[cnt++] = elem;
+    } else
+        data = nullptr;
+}
+
+template <typename T> MyArray<T>::~MyArray() {
+    if ( data ) {
+        if constexpr ( std::is_pointer<T>::value ) {
+            for ( size_t i = 0; i < cnt; ++i ) {
+                delete data[i];
+            }
+        }
+    }
+    delete[] data;
+}
+
+#endif // MYCLASS_H_
+#+end_src
+
+#+begin_src c++
+#include "MyClass.hpp"
+#include <iostream>
+
+int main( int argc, char *argv[] ) {
+
+    std::initializer_list<int> iList{ 1, 2, 3, 4, 5, 6 };
+
+    int i1 = 10, i2 = 20, i3 = 30, i4 = 40;
+
+    std::initializer_list<int *> iList1{ &i1, &i2, &i3, &i4 };
+    MyArray<int *> arrayP( iList1 );
+    for ( std::size_t i = 0; i < iList1.size(); i++ )
+        std::cout << *arrayP[i] << std::endl;
+
+    return 0;
+}
+#+end_src
+
+* typename
+:PROPERTIES:
+:CUSTOM_ID: typename
+:END:
+1. 在定义模板时表示这个一个待定的类型
+
+2. 在类外表明自定义类型时使用
+
+#+begin_quote
+在 C++的早起版本，为了减少关键字的数量，用class来表示模板的参数，但是后来因为第二个原因，不得不引入typename关键字
+#+end_quote
+
+** 函数模板、成员函数模板
+:PROPERTIES:
+:CUSTOM_ID: 函数模板-成员函数模板
+:END:
+#+begin_src c++
+namespace mystd {
+// NOTE: 函数模板
+template <typename iter_type, typename func_type>
+void for_each(iter_type first, iter_type last, func_type func) {
+  for (auto iter = first; iter != last; iter++) {
+    func(*iter);
+  }
+}
+
+template <typename T> class Myvector {
+public:
+  template <typename T2> void OutPut(const T2 &elem);
+};
+// NOTE:类外定义函数
+
+template <typename T>
+template <typename T2>
+
+void Myvector<T>::OutPut(const T2 &elem) {
+  std::cout << elem << std::endl;
+}
+
+} // namespace mystd
+
+int main() {
+  std::vector<int> ivec{1, 2, 3, 4, 5};
+  mystd::for_each(ivec.begin(), ivec.end(), [](int &elem) { ++elem; });
+
+  for (auto &elem : ivec) {
+    std::cout << elem << std::endl;
+  }
+  mystd::Myvector<int> myvec;
+
+  for (const auto &elem : ivec) {
+    myvec.OutPut(elem);
+  }
+
+  return 0;
+}
+#+end_src
+
+** 默认模板参数
+:PROPERTIES:
+:CUSTOM_ID: 默认模板参数
+:END:
+1. 默认模板参数是一个经常使用的特性，比如在定义 =vector= 对象时，我们就可以使用默认分配器
+
+2. 模板默认参数和普通函数的默认参数一样，一旦一个参数有了默认参数，它之后的参数都必须有默认参数
+
+3. 函数模板使用默认模板参数
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <vector>
+#include <algorithm>
+
+namespace mystd {
+// NOTE: 函数模板
+
+using void_int_func_type = std::function<void(int&)>;
+
+template <typename iter_type, typename func_type = void_int_func_type>
+void for_each(iter_type first , iter_type last , func_type func = [](int &elem) {++elem;}) {
+  for(auto iter = first; iter != last; iter ++)
+    func(*iter);
+}
+
+
+
+} // namespace mystd
+
+int main() {
+  std::vector<int> ivec{1, 2, 3, 4, 5};
+  mystd::for_each(ivec.begin(), ivec.end());
+
+  for (auto &elem : ivec) {
+    std::cout << elem << std::endl;
+  }
+
+  return 0;
+}
+#+end_src
+
+1. 类模板使用默认模板参数
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <vector>
+
+namespace mystd {
+
+template <typename T, typename allocator_type = std::allocator<T>> class Myvector {
+public:
+  template <typename T2> void OutPut(const T2 &elem);
+};
+
+template <typename T, typename allocator_type>
+template <typename T2>
+void Myvector<T, allocator_type>::OutPut(const T2 &elem) {
+  std::cout << elem << std::endl;
+}
+
+} // namespace mystd
+
+int main() {
+  mystd::Myvector<int> ivec;
+  ivec.OutPut(29);
+
+  return 0;
+}
+#+end_src
+
+* 模板重载与偏特化、全特化
+:PROPERTIES:
+:CUSTOM_ID: 模板重载与偏特化-全特化
+:END:
+** 模板重载
+:PROPERTIES:
+:CUSTOM_ID: 模板重载
+:END:
+函数模板是可以重载的（类模板不能重载），通过重载可以应对更加复杂的情况。比如在处理 =char*= 和 =string= 对象时，虽然都可以代表字符串，但 =char*= 在复制时直接拷贝内存效率明显更高， =string= 就不得不调用构造函数了，所以在一些比较追求效率的程序中对不同类型进行不同的处理还是非常有意义的
+
+#+begin_src c++
+#include <iostream>
+#include <string>
+#include <vector>
+
+template <typename T> void test(const T &param) {
+  std::cout << "void test(const T &param)" << std::endl;
+}
+
+template <typename T> void test(T *param) {
+  std::cout << "void test(T *param)" << std::endl;
+}
+
+void test(double param) {
+  std::cout << "void test(double param)" << std::endl;
+}
+
+int main() {
+  test(100);
+  int i = 100;
+  test(&i);
+  test(2.2);
+  int a = 20 , b = 30;
+  return 0;
+}
+#+end_src
+
+其实函数模板的重载和普通函数的重载没有什么区别，在讲完类模板特化就能知道重载和特化的区别了，这一点暂时不用在意了
+
+** 模板特化
+:PROPERTIES:
+:CUSTOM_ID: 模板特化
+:END:
+- 模板特化的意义函数模板可以重载以应对更加精细的情况，类模板不能重载，但可以特化来实现类似的功能
+
+- 模板的特化可以分为两种：全特化和偏特化
+
+  1. 模板的全特化：就是指模板的实参列表与相应的模板参数列表一一对应
+
+  2. 模板的偏特化：偏特化就是介于普通模板和全特化之间，只存在部分类型明确化，而非将模板唯一化
+
+- 其实对于函数模板来说，特化与重载可以理解为一个东西
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+template<typename T1 , typename T2>
+class Test {
+public:
+  Test() {
+    std::cout << "common template" << std::endl;
+  }
+};
+
+template<typename T1 , typename T2>
+class Test<T1* , T2*> {
+public:
+  Test() {
+    std::cout << "point template" << std::endl;
+  }
+};
+
+// NOTE:部分特化
+template<typename T2>
+class Test<int, T2> {
+public:
+  Test() {
+    std::cout << "int -semi-special" << std::endl;
+  }
+};
+
+// NOTE: 全特化
+template<>
+class Test<int , int> {
+public:
+  Test() {
+    std::cout << "int, int complete special" << std::endl;
+  }
+};
+
+int main() {
+
+  Test<int * , int *> test1;
+  Test<int , double> test2;
+  Test<int , int> test3;
+  Test<int* , int> test4;
+  return 0;
+}
+#+end_src
+
+** 模板的递归
+:PROPERTIES:
+:CUSTOM_ID: 模板的递归
+:END:
+
+#+begin_quote
+如何提高程序运行效率？在编译时就把需要计算的结果算出来，避免运行时占用CPU时间去做耗时计算，这就是模板递归的原理
+#+end_quote
+
+#+begin_src c++
+#include <iostream>
+
+using i64 = long long;
+
+template<int m , int n>
+class C {
+public:
+    static const i64 result = C<m , n - 1>::result * m;
+};
+
+template<int m>
+class C<m , 0>{ // NOTE: 递归终止条件
+public:
+   static const i64 result = 1;
+};
+int main() {
+    std::cout << C<2,4>::result << std::endl;
+    return 0;
+}
+#+end_src
+
+- 缺点
+  1. 不能计算变量的值，也就是对于运行时缺点能够的数据不能通过模板递归出来，因为编译时需要确定运行结果
+  2. 不能进行异常处理，也就是模板传入一个错误的数字后可能导致崩溃
+- 优点编译时就把数据计算出来了，对于运行时的大数据递归计算效率大大提高了
+
+* 可变参数、折叠表达式
+:PROPERTIES:
+:CUSTOM_ID: 可变参数-折叠表达式
+:END:
+
+#+begin_quote
+这玩意对参数进行了高度泛化，它能表示0到任意个数、任意类型的参数
+#+end_quote
+
+实现方式：
+ - 需要有一个只有一个参数的函数作为递归终止函数
+ - 递归调用
+
+#+begin_src c++
+template<typename T>
+void print(T&& x) {
+    std::cout << x << " ";
+}
+
+template<typename T , typename... Args>
+void print(T&& first , Args&&... args) {
+    std::cout << first << " ";
+    print(std::forward<Args>(args)...);
+}
+#+end_src
+
+这样写有时候又有点麻烦，有没有一种方法可以只需要写一个函数就可以了，不需要写递归终止函数，c++17就提出了折叠表达式
+
+#+begin_src c++
+template<typename... Args>
+void print2(Args&&... args) {
+    ((std::cout << args << ' ') , ...); //NOTE: 这里为了让每个参数输出后，都得带一个空格，就使用了逗号表达式
+    std::cout << std::endl;
+}
+#+end_src
+
+** 折叠分类
+:PROPERTIES:
+:CUSTOM_ID: 折叠分类
+:END:
+分为左折叠和右折叠
+
+1. 左折叠
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+template<typename... Args>
+auto sum(Args&&... args) {
+    return (... + args);
+}
+
+// int sum(1 , 2 , 3 , 4 , 6) -> 1 + (2 + (3 + (4 + 6)))
+#+end_src
+
+1. 右折叠
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+template<typename... Args>
+auto sum(Args&&... args) {
+    return (args + ...);
+}
+
+// int sum(1 , 2 , 3 , 4 , 6) -> ((((1 + 2) + 3) + 4) + 5) + 6
+#+end_src
+
+- 总结：只需要看 =...= 在操作符的左侧还是右侧即可，如果在左侧就是左折叠，如果在右侧就是右折叠。
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+- 注意：在折叠表达式中，左折叠和右折叠的减法操作和除法操作由于操作顺序不一样，结果也会不一样
+
+*** 空参数包问题
+:PROPERTIES:
+:CUSTOM_ID: 空参数包问题
+:END:
+空参数包就是没有参数，对于大多数操作符而言，空参数包将会引发编译错误。针对上面的例子，我们可以加上一个0,这个0相当于缺省值，这就变成了二元折叠。
+
+二元折叠
+
+#+begin_src c++
+template<typename... Args>
+auto sum(Args&&... args) {
+    return (args + ... + 0);
+}
+// int sum(1 , 2 , 3 , 4 , 6 , 0) -> (((((1 + 2) + 3) + 4) + 5) + 6) + 0
+#+end_src
+
+** 一些例子
+:PROPERTIES:
+:CUSTOM_ID: 一些例子
+:END:
+1. 计算指定区间内包含指定数值的个数
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+#include <algorithm>
+template<typename T , typename... Args>
+size_t count(T&& range , Args&&... args) {
+    return (std::count(std::begin(range) , std::end(range) , args) + ...);
+}
+
+void test_variadic_template() {
+    std::string s = "aabcdef";
+    std::cout << count(s , 'X' , 'c' , 'v', 'a') << std::endl;
+}
+
+int main() {
+    test_variadic_template();
+}
+#+end_src
+* [[id:33d880dd-8cdb-4046-a1bc-a35845da2c47][万能引用及引用折叠]]
+* [[id:11c99b4f-ebbe-4dcb-9d34-2d24d8c8fe8c][auto]]
+* [[id:c2a896b0-b944-418e-89bd-a4deaac01659][decltype]]
+* [[id:5b9758c5-a3da-4f33-9021-1165793915e3][左值右值及引用]]
+

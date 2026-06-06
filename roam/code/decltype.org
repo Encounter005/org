@@ -1,0 +1,207 @@
+:PROPERTIES:
+:ID:       c2a896b0-b944-418e-89bd-a4deaac01659
+:END:
+#+title: decltype
+#+startup: overview
+#+filetags: :cpp:decltype:
+
+* decltype关键字
+:PROPERTIES:
+:CUSTOM_ID: decltype关键字
+:END:
+- auto，用于通过一个表达式在编译时确定待定义的变量类型，auto所修饰的变量必须被初始化，编译器需要通过初始化来确定auto所代表的类型，即必须要定义变量。
+- 若仅希望得到类型，而不需要（或不能）定于变量的时候那应该怎么办？C++11新增了 =decltype= 关键字，用来在编译时推导出一个表达式的类型。
+
+** 使用编译器诊断
+:PROPERTIES:
+:CUSTOM_ID: 使用编译器诊断
+:END:
+#+begin_src c++
+template<typename T>
+class TypeDisplayer; // NOTE: just defination no declartion
+
+TypeDisplayer<decltype(expression)> test;
+#+end_src
+
+*** 例子
+:PROPERTIES:
+:CUSTOM_ID: 例子
+:END:
+1. 参数类型是指针/引用
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+namespace {
+template<typename ParamType>
+void func(ParamType& t) {
+
+}
+};
+
+// NOTE:
+// 1. if has reference, ignore the reference part
+// 2. regular match
+
+
+int x = 10;
+const int cx = x;
+const int& rx = x;
+
+func(x); // NOTE: T-> int  ParamType int&
+func(cx); // T-> const int   ParamType const int&
+func(rx); // T-> const int  ParamType const int&
+#+end_src
+
+1. 参数类型是万能引用
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+namespace {
+template<typename ParamType>
+void func(ParamType&& t) {
+
+}
+};
+
+// NOTE:
+// 1. if l-value -> T&
+// 2. if r-value -> normal rules applies
+
+
+int x = 10;
+const int cx = x;
+const int& rx = x;
+
+func(x); // NOTE: T-> int  ParamType int& -> Reference Collapse(引用折叠)
+func(cx); // NOTE: T-> const int   ParamType const int&
+func(rx); // NOTE: T-> const int  ParamType const int&
+func(27); // NOTE: T-> int
+#+end_src
+
+1. 参数类型不是指针/引用
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+
+template<typename T>
+class TypeDisplayer;
+template<typename T>
+void func(T param) {
+    TypeDisplayer<decltype(param)> test;
+    param = 100;
+}
+
+// NOTE: ignore the reference and ocnst
+
+int main() {
+    int x = 10;
+    const int cx = x;
+    const int& rx = x;
+
+    func(x); // NOTE: T-> int  ParamType int& -> Reference Collapse(引用折叠)
+    func(cx); // NOTE: T-> const int   ParamType const int&
+    func(rx); // NOTE: T-> const int  ParamType const int&
+    func(27); // NOTE: T-> int
+    std::cout << rx << std::endl;
+
+    return 0;
+}
+#+end_src
+
+1. 数组退化
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+
+template<typename T>
+class TypeDisplayer;
+template<typename T>
+void func(T& param) {
+    // TypeDisplayer<decltype(param)> test;
+    // NOTE: if has no reference, is a pointer
+    // else is a array
+    std::cout << sizeof param << std::endl;
+}
+
+
+int main() {
+    const char hello[13] = "nihao"; // NOTE: const char* Array Decay(数组退化成指针)
+    func(hello);
+    return 0;
+}
+#+end_src
+
+** 确认返回值类型
+:PROPERTIES:
+:CUSTOM_ID: 确认返回值类型
+:END:
+
+#+begin_quote
+decltype通常用于表面一个函数模板的返回值的类型
+#+end_quote
+
+#+begin_src c++
+#include <iostream>
+#include <vector>
+#include <cassert>
+
+template <typename T> class TypeDisplayer;
+
+template <typename Container, typename Index>
+decltype(auto) func(Container&& c, const Index& i ) {
+    return std::forward<Container>(c)[i];
+    // NOTE: 不使用decltype之前，函数返回值是int，使用之后，函数返回值是int&
+}
+
+int main() {
+    std::vector<int> a{1 , 4 , 48 , 489 , 382};
+    int& res = func(std::vector<int>{1 , 3, 48 , 890} , 1);
+
+    return 0;
+}
+#+end_src
+
+#+begin_src c++
+
+decltype(auto) f1() {
+    /*
+     expression
+    ,*/
+    retunr x // NOTE: decltype(x) is int , so f1 returns int
+}
+
+decltype(auto) f2() {
+    /*
+     expression
+    ,*/
+    retunr (x) // NOTE: decltype(x) is int& , so f2 returns int
+}
+#+end_src
+
+*** 后置推导
+:PROPERTIES:
+:CUSTOM_ID: 后置推导
+:END:
+#+begin_src c++
+template <typename F, typename... Args>
+auto commit(F&& func, Args&&... args) -> std::future<decltype(func(args...))> {}
+
+using RetType = decltype( func( args... ) );
+#+end_src
+
+这段代码的意思是，在给线程池做任务提交的时候，去推断任务（也就是函数）的返回值类型，然后保存到一个std::future对象中,供我们异步调用该任务
+

@@ -1,0 +1,195 @@
+:PROPERTIES:
+:ID:       11c99b4f-ebbe-4dcb-9d34-2d24d8c8fe8c
+:END:
+#+title: auto
+#+startup: overview
+#+filetags: :cpp:auto:
+
+* auto关键字
+:PROPERTIES:
+:CUSTOM_ID: auto关键字
+:END:
+** 关于输出 auto 推断的变量类型 -- boost 库
+:PROPERTIES:
+:CUSTOM_ID: 关于输出-auto-推断的变量类型-boost-库
+:END:
+#+begin_src c++
+#include<iostream>
+#include<boost/type_index.hpp>
+
+using boost::typeindex::type_id_with_cvr;
+
+int main()
+{
+    auto i = 100;
+    std::cout << type_id_with_cvr<decltype(i)>().pretty_name() << std::endl;
+
+    return 0;
+}
+#+end_src
+
+** 需要注意的点
+:PROPERTIES:
+:CUSTOM_ID: 需要注意的点
+:END:
+1. auto 只能推断出类型，引用不是类型，所以 auto 无法推断出引用，要使用引用只能自己加引用符号
+2. auto关键字在推断引用的类型时会直接将引用替换为引用指向的对象。其实引用一直是这样的，引用不是对象，任何使用引用的地方都可以直接替换成引用指向的对象。
+
+
+#+begin_src c++
+#include<iostream>
+#include<boost/type_index.hpp>
+
+using boost::typeindex::type_id_with_cvr;
+
+int main()
+{
+    const int i = 100;
+    const int& refi = i;
+    auto i2 = refi;// 其实i2直接指向i
+    std::cout << type_id_with_cvr<decltype(i2)>().pretty_name() << std::endl;
+
+    return 0;
+}
+#+end_src
+
+1. auto 关键字在推断类型时，如果没有引用符号，会忽略值类型的 const 修饰，而保留修饰指向对象的 const，典型的就是指针。
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include<iostream>
+#include<boost/type_index.hpp>
+
+using boost::typeindex::type_id_with_cvr;
+
+int main()
+{
+
+    int i = 100;
+    int a = 120;
+    const int* const pi = &i;
+    auto i2 = pi;// const int*
+    i2 = &a;
+    std::cout << type_id_with_cvr<decltype(i2)>().pretty_name() << std::endl;
+    std::cout << *i2 << std::endl;
+    // const int i = 100;
+    // auto i2 = i;
+    // std::cout << type_id_with_cvr<decltype(i2)>().pretty_name() << std::endl;
+    return 0;
+}
+#+end_src
+
+1. auto 关键字在推断类型时，如果有了引用符号，那么值类型的 const 和修饰指向对象的 const 都会保留。
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include<iostream>
+#include<boost/type_index.hpp>
+
+using boost::typeindex::type_id_with_cvr;
+
+int main()
+{
+
+    int i = 100;
+    const int* const pi = &i;
+    auto& i2 = pi;
+    std::cout << type_id_with_cvr<decltype(i2)>().pretty_name() << std::endl;
+    return 0;
+}
+#+end_src
+
+1. 当然，我们可以在 =auto= 前面加上 =const= ，这样永远都有 =const= 的含义。
+
+2. auto 不会影响编译速度，甚至会加快编译速度。因为编译器在处理 XX a = b 时，当 XX 是传统类型时，编译期需要检查 b 的类型是否可以转化为 XX。当 XX 为 auto 时，编译期可以按照 b 的类型直接给定变量 a 的类型，所以效率相差不大，甚至反而还有提升。
+
+3. 最重要的一点，就是 auto 不要滥用，对于一些自己不明确的地方不要乱用 auto，否则很可能出现事与愿违的结果，使用类型应该安全为先。
+
+4. auto 主要用在与模板相关的代码中，一些简单的变量使用模板常常导致可读性下降，经验不足还会导致安全性问题。
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> A;
+
+int main() {
+  int n = 5;
+  while (n--) {
+    int x;
+    cin >> x;
+    A.push_back(x);
+  }
+
+  for (vector<int>::iterator i = A.begin(); i != A.end(); i++)
+    cout << *i << endl;// 可以用auto来代替vector<int>::iterator
+
+  return 0;
+}
+#+end_src
+
+1. auto在推断数组时为推断出std::initializer_list
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+#include <iostream>
+
+template<typename T>
+class TypeDisplayer;
+
+template<typename T>
+void func1(T t) {
+    TypeDisplayer<decltype(t)> test;
+}
+
+int main() {
+
+    auto x = {1 , 2 , 3 , 4}; // NOTE: std::initializer_list<int>
+    func1(x);
+
+
+    return 0;
+}
+#+end_src
+
+1. 无法推断返回类型，要使用decltype
+
+#+begin_html
+  <!--listend-->
+#+end_html
+
+#+begin_src c++
+
+template<typename T>
+class TypeDisplayer;
+
+template<typename T>
+// BUG: template deduction
+auto func(T t) {
+    return {1 , 2 , 3};
+}
+
+int main() {
+    int a = 10;
+    func(10);
+
+    return 0;
+}
+#+end_src
+
+1. 不要将auto用在返回类型为bool的函数上
+

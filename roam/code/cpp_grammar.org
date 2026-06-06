@@ -4,3 +4,7 @@
 #+title: cpp-grammar
 #+startup: overview
 #+filetags: :cpp:grammar:
+
+* [[id:a40d0ca1-2dff-410b-bc2f-03c0c2b30f99][cpp-oop]]
+* [[id:e90e6016-7320-4153-9e09-53643dd6462f][cpp-smart-pointer]] 
+* [[id:b270628e-b5d7-4d16-b378-e6ac6ee682f4][cpp-template]]

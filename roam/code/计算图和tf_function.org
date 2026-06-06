@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       9c563f9a-59c7-4d25-9bf3-14f6afd3a3e4
+:END:
+#+title: 计算图和tf.function
+#+startup: overview
+#+filetags: :tensorflow:Graph:function:
+
