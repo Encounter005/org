@@ -63,3 +63,4 @@ $y^{'} = b +  w_1 x_1 + w_2 x_2 + w_3 x_3 + w_4 x_4$
 * [[id:392c9da2-00e5-4528-ad08-9aab2abf0b4b][损失]]
 * [[id:eda037c2-6396-44e4-9401-a6ca6436e5c3][梯度下降法]]
 * [[id:1f304614-b5de-4749-9972-a488c9173cfb][超参数]]
+* [[file:~/code/python/ML/google_tutorial/linear_model.py][编程作业]] 

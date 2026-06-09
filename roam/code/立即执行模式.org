@@ -8,7 +8,7 @@
 * 定义
 立即执行模式是 =TensorFlow 2.0= 的默认执行方式，操作会立即计算并返回具体值，而不是构建计算图。
 默认是开启的
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 
 print(f"Is EagerExecution on: {tf.executing_eagerly()}")

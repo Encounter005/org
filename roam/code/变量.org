@@ -9,7 +9,7 @@
 
 * 定义
 [[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 
 # definition
@@ -23,7 +23,7 @@ print(50 * "#")
 
 * 操作
 [[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 # operation 支持四则运算
 x = tf.Variable(5)
@@ -44,7 +44,7 @@ print(y.value().numpy())
 - assign_sub(): 将指定的值减到变量上
 
 [[file:~/code/python/ML/tensorflow_tutorial/variable/variable.py][code]]
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 v = tf.Variable([1.0, 2.0, 3.0])
 

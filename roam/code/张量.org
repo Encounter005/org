@@ -8,7 +8,7 @@
 * 创建张量
 从numpy数组和python列表创建
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor.py][code]]
-#+begin_src python
+#+begin_src python :results output
 #!/usr/bin/env python3
 
 import tensorflow as tf
@@ -44,7 +44,7 @@ print(f"numpy: {tensor_from_numpy}")
 #+end_src
 * 张量属性
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_property.py][code]]
-#+begin_src python
+#+begin_src python :results output 
 #!/usr/bin/env python3
 import tensorflow as tf
 
@@ -67,7 +67,7 @@ def tensor_property(tensor, name: str = ""):
 
 * 创建特殊张量
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/special_tensor.py][code]]
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 import tensor_property as tp
 
@@ -111,7 +111,7 @@ tp.tensor_property(tensor)
 #+end_src
 * 张量数据类型
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_dtype.py][code]]
-#+begin_src python
+#+begin_src python :results output
 #!/usr/bin/env python3
 import tensorflow as tf
 
@@ -132,7 +132,7 @@ print("new tensor: {}\n data_type is: {}".format(tensor_int, tensor_int.dtype))
 * 张量操作
 ** 张量数学操作
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_math_operation.py][code]]
-#+begin_src python
+#+begin_src python :results output
 #!/usr/bin/env python3
 
 import tensorflow as tf
@@ -165,7 +165,7 @@ print("对数: \n{}".format(tf.math.log(a))) # NOTE: ln(a) 表示新矩阵中每
 #+end_src
 ** 张量形状操作
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_shape_operation.py][code]]
-#+begin_src python
+#+begin_src python :results output
 #!/usr/bin/env python3
 
 import tensorflow as tf
@@ -193,7 +193,7 @@ print(f"转置: \n{transposed}")
 #+end_src
 * 张量切片索引
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_slice.py][code]]
-#+begin_src python
+#+begin_src python :results output
 import tensorflow as tf
 import tensor_property as tp
 
@@ -224,7 +224,7 @@ print(f"大于5的值: \n{tensor[mask]}")
 #+end_src
 * 张量广播
 [[file:~/code/python/ML/tensorflow_tutorial/tensor/tensor_boardcast.py][code]]
-#+begin_src python
+#+begin_src python :results output
 #!/usr/bin/env python3
 
 import tensorflow as tf
