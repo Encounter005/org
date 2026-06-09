@@ -32,3 +32,6 @@
 * 阈值对真正例、假正例和假负例的影响
 一般来说，如果提高分类阈值，真正例和假正例都会减少，真负例和假负例都会增加。
 * [[id:998b55d6-636d-4ac9-a5bb-b800ce0dd2f6][分类相关指标]]
+* [[id:e02fc899-f694-4ec3-99f2-36710dca39cc][接收器操作特征曲线(ROC)]]
+* [[id:2ea241f5-7b3e-4583-b9de-847fc8ad4cb0][预测偏差]]
+* [[file:~/code/python/ML/google_tutorial/binary_classification_rice.py][编程作业]] 
