@@ -5,3 +5,48 @@
 #+startup: overview
 #+filetags: :tensorflow:Graph:function:
 
+* [[https://www.tensorflow.org/guide/intro_to_graphs?hl=zh-cn][Reference]] 
+
+* 计算图
+计算图是一种图结构，其中每个节点表示一个操作，边表示数据流（如张量）。通过这种方式，可以将计算分解为一系列的节点和边。
+** 优点
+使用计算图，您将拥有极大的灵活性。您可以在移动应用、嵌入式设备和后端服务器等没有 Python 解释器的环境中使用 TensorFlow 计算图。当 TensorFlow 从 Python 导出计算图时，它会将这些计算图用作已保存模型的格式。
+
+** 利用计算图
+您可以使用 tf.function 在 TensorFlow 中创建和运行计算图，要么作为直接调用，要么作为装饰器。tf.function 将一个常规函数作为输入并返回一个 Function。Function 是一个 Python 可调用对象，它通过 Python 函数构建 TensorFlow 计算图。您可以按照与其 Python 等价函数相同的方式使用 Function。
+#+begin_src python :results output
+#!/usr/bin/env python3
+import tensorflow as tf
+
+@tf.function
+def add_number(x, y):
+    return x + y
+
+
+x = tf.constant(1)
+y = tf.constant(2)
+
+print(add_number(x, y))
+
+# Define a Python function.
+def a_regular_function(x, y, b):
+  x = tf.matmul(x, y)
+  x = x + b
+  return x
+
+# `a_function_that_uses_a_graph` is a TensorFlow `Function`.
+a_function_that_uses_a_graph = tf.function(a_regular_function)
+
+# Make some tensors.
+x1 = tf.constant([[1.0, 2.0]])
+y1 = tf.constant([[2.0], [3.0]])
+b1 = tf.constant(4.0)
+
+orig_value = a_regular_function(x1, y1, b1).numpy()
+# Call a `Function` like a Python function.
+tf_function_value = a_function_that_uses_a_graph(x1, y1, b1).numpy()
+assert(orig_value == tf_function_value)
+#+end_src
+
+#+RESULTS:
+: tf.Tensor(3, shape=(), dtype=int32)
